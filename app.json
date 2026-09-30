@@ -1,0 +1,25 @@
+{
+  "app": {
+    "appId": "2522725584854781271",
+    "title": "WrenApp - Tra cứu mã bưu chính",
+    "headerColor": "#0068FF",
+    "statusBarColor": "#0068FF",
+    "textColor": "white"
+  },
+  "template": {
+    "type": "zaui-blank",
+    "name": "zaui-blank"
+  },
+  "pages": [
+    "pages/index/index"
+  ],
+  "listSyncableEvent": [],
+  "permission": {},
+  "listCSS": [
+    "assets/index-cd1df347.css"
+  ],
+  "listSyncJS": [],
+  "listAsyncJS": [
+    "assets/index-42afe0bb.js"
+  ]
+}

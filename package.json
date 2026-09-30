@@ -1,0 +1,27 @@
+{
+  "name": "wrenapp-zalo-zipcode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WrenApp - Tra cứu mã bưu chính (ZIP Code) Việt Nam (63 tỉnh thành) & Quốc tế (60 quốc gia) trên nền tảng Zalo Mini App",
+  "scripts": {
+    "start": "zmp start",
+    "deploy": "node run_deploy.js",
+    "build": "vite build",
+    "audit": "node zmp-audit.js",
+    "test:pivot": "node test_zcode_pivot.js",
+    "webhook": "node webhook-server.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "zmp-sdk": "^2.41.0",
+    "zmp-ui": "^1.11.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "sass": "^1.69.5",
+    "vite": "^4.5.0",
+    "zmp-cli": "^4.0.3"
+  }
+}

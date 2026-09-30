@@ -1,0 +1,386 @@
+{
+  "version": "2.0.0",
+  "policySource": "https://miniapp.zaloplatforms.com/documents/zalo-mini-app-censorship-policy/",
+  "updatedAt": "2026-09-30",
+  "name": "Zalo Mini App Censorship Policy Audit Rules",
+  "description": "Bộ quy tắc kiểm tra tuân thủ chính sách kiểm duyệt chính thức của Zalo Mini App",
+  "categories": [
+    {
+      "id": "1",
+      "name": "Logo Mini App",
+      "rules": [
+        {
+          "id": "LOGO_01_GENUINE",
+          "title": "Logo chính chủ, không giả mạo",
+          "severity": "CRITICAL",
+          "description": "Mini App phải sử dụng logo của chính mình, không dùng logo thương hiệu khác, nhãn hàng khác và không được để trống logo.",
+          "checkType": "manual_and_config",
+          "violation": "Logo giả mạo thương hiệu nổi tiếng hoặc không có logo."
+        },
+        {
+          "id": "LOGO_02_SUITABLE",
+          "title": "Logo phù hợp chức năng, không chứa SĐT/QR và không trong suốt",
+          "severity": "ERROR",
+          "description": "Logo phải thể hiện đúng chức năng, KHÔNG chứa số điện thoại, KHÔNG chứa mã QR code, và KHÔNG được có background trong suốt (phải có nền màu solid).",
+          "checkType": "manual_and_asset",
+          "violation": "Logo chứa SĐT, QR code hoặc có nền trong suốt."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Tên Mini App",
+      "rules": [
+        {
+          "id": "NAME_01_RELEVANT",
+          "title": "Tên phù hợp với tính năng / chức năng",
+          "severity": "ERROR",
+          "description": "Tên Mini App phải thể hiện đúng chức năng, không gây hiểu lầm hoặc sai lệch công năng thực tế.",
+          "checkType": "manual_and_config",
+          "violation": "Tên app một đằng, chức năng một nẻo."
+        },
+        {
+          "id": "NAME_02_NO_ALL_CAPS",
+          "title": "Không viết hoa toàn bộ (ALL CAPS)",
+          "severity": "ERROR",
+          "pattern": "^[A-Z0-9\\s\\p{P}]+$",
+          "description": "Tên Mini App không được viết in hoa toàn bộ các ký tự.",
+          "checkType": "config_regex",
+          "target": "app.title",
+          "violation": "Tên app viết hoa toàn bộ như 'TRA CUU MA BUU CHINH'."
+        },
+        {
+          "id": "NAME_03_NO_GENERIC_KEYWORD",
+          "title": "Không sử dụng từ khóa / danh từ chung đơn thuần",
+          "severity": "CRITICAL",
+          "description": "Tên Mini App không được mang tính chất từ khóa chung, danh từ chung chỉ ngành nghề, dịch vụ hoặc địa danh (VD: 'Tra cứu mã bưu chính', 'Mua sắm online', 'Việt Nam').",
+          "checkType": "config_heuristic",
+          "target": "app.title",
+          "violation": "Tên chỉ toàn từ khóa chung ngành nghề không có chủ thể sở hữu."
+        },
+        {
+          "id": "NAME_04_NO_BANNED_WORDS",
+          "title": "Không chứa các từ 'App', 'Mini App', 'Zalo'",
+          "severity": "CRITICAL",
+          "pattern": "\\b(mini\\s*app|zalo)\\b",
+          "description": "Tên Mini App không được chứa các từ cấm: 'Mini App', 'Zalo' (từ 'App' đứng riêng lẻ cũng bị hạn chế nếu gây nhầm lẫn).",
+          "checkType": "config_regex",
+          "target": "app.title",
+          "violation": "Tên app chứa chữ 'Zalo' hoặc 'Mini App'."
+        },
+        {
+          "id": "NAME_05_NO_SPECIAL_CHARS",
+          "title": "Không chứa ký tự đặc biệt (#, $, @, !), emoji hoặc biểu tượng",
+          "severity": "ERROR",
+          "pattern": "[#$@!~%^&*+=<>?\\/\\\\|{}\\[\\]\\uD83C-\\uDBFF\\uDC00-\\uDFFF]",
+          "description": "Tên Mini App không được chứa ký tự đặc biệt (#, $, @, !), biểu tượng cảm xúc (emoji) hoặc icon trang trí.",
+          "checkType": "config_regex",
+          "target": "app.title",
+          "violation": "Tên app có icon emoji hoặc ký tự đặc biệt @, #, $."
+        },
+        {
+          "id": "NAME_06_OWNER_AFFIX",
+          "title": "Phải có tiền tố/hậu tố gắn với chủ thể sở hữu",
+          "severity": "CRITICAL",
+          "description": "Tên Mini App cần có tiền tố hoặc hậu tố giúp người dùng phân biệt và xác định rõ đơn vị/cá nhân sở hữu (công thức: [Tên chủ thể] + [Chức năng]).",
+          "checkType": "manual_and_config",
+          "violation": "Tên app thiếu tên chủ thể/thương hiệu sở hữu."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Mô tả Mini App",
+      "rules": [
+        {
+          "id": "DESC_01_REQUIRED",
+          "title": "Mô tả không được để trống",
+          "severity": "ERROR",
+          "description": "Mini App phải có mô tả ngắn gọn, rõ ràng.",
+          "checkType": "config_check",
+          "violation": "Mini App không có mô tả."
+        },
+        {
+          "id": "DESC_02_RELEVANT",
+          "title": "Mô tả phản ánh chính xác chức năng & đối tượng",
+          "severity": "ERROR",
+          "description": "Mô tả phải liên quan và phản ánh trung thực tính năng, đối tượng và mục đích của ứng dụng.",
+          "checkType": "manual",
+          "violation": "Mô tả không phản ánh hoặc không liên quan đến chức năng ứng dụng."
+        },
+        {
+          "id": "DESC_03_NO_EXTERNAL_LINKS",
+          "title": "Mô tả không được chứa đường liên kết (URL / Link)",
+          "severity": "CRITICAL",
+          "pattern": "https?:\\/\\/|www\\.",
+          "description": "Trong văn bản mô tả Mini App tuyệt đối không được chèn URL, website link hoặc liên kết ngoài.",
+          "checkType": "config_regex",
+          "violation": "Mô tả chứa đường link URL trang web."
+        },
+        {
+          "id": "DESC_04_CLEAN_CONTENT",
+          "title": "Không vi phạm thuần phong mỹ tục hoặc pháp luật",
+          "severity": "CRITICAL",
+          "description": "Mô tả không được chứa bất kỳ nội dung vi phạm pháp luật, kích động, mê tín, nhạy cảm.",
+          "checkType": "manual",
+          "violation": "Nội dung mô tả vi phạm thuần phong mỹ tục."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Nội dung Mini App",
+      "rules": [
+        {
+          "id": "CONTENT_01_NO_EXTERNAL_REDIRECT",
+          "title": "Không điều hướng ra liên kết ngoài Mini App",
+          "severity": "CRITICAL",
+          "description": "Không tự ý mở web ngoài, không khuyến khích người dùng tải app riêng (Native App Android/iOS). Nếu hiển thị Chính sách/Điều khoản thì phải nhúng popup trực tiếp bên trong Mini App.",
+          "checkType": "code_ast_and_regex",
+          "pattern": "window\\.open|window\\.location\\.href\\s*=\\s*['\"]https?:\\/\\/(?!api|h5\\.zdn\\.vn|zalo\\.me)",
+          "violation": "Điều hướng người dùng mở trình duyệt ngoài hoặc tải ứng dụng khác."
+        },
+        {
+          "id": "CONTENT_02_NO_3RD_PARTY_LOGIN",
+          "title": "Không điều hướng đăng nhập bằng Google, Facebook, Apple",
+          "severity": "CRITICAL",
+          "pattern": "(accounts\\.google\\.com|facebook\\.com\\/v[0-9]|appleid\\.apple\\.com)",
+          "description": "Không được điều hướng người dùng đăng nhập bằng tài khoản mạng xã hội bên ngoài như Google, Facebook, Apple. Phải ưu tiên dùng Zalo Authentication hoặc cơ chế tài khoản nội bộ.",
+          "checkType": "code_regex",
+          "violation": "Có nút đăng nhập hoặc điều hướng sang Google/Facebook OAuth."
+        },
+        {
+          "id": "CONTENT_03_LEGAL_COMPLIANCE",
+          "title": "Nội dung đúng pháp luật và thuần phong mỹ tục",
+          "severity": "CRITICAL",
+          "description": "Không chứa nội dung sai lệch, lừa đảo, giả mạo, vi phạm pháp luật Việt Nam.",
+          "checkType": "manual",
+          "violation": "Nội dung vi phạm pháp luật hoặc sai sự thật."
+        },
+        {
+          "id": "CONTENT_04_NO_UNAUTHORIZED_ADS",
+          "title": "Không tự ý treo banner quảng cáo kiếm tiền",
+          "severity": "CRITICAL",
+          "pattern": "(adsbygoogle|googlesyndication|admob|adcolony)",
+          "description": "Không tự ý nhúng banner mạng quảng cáo kiếm tiền của bên thứ ba trong ứng dụng. Chỉ sử dụng Zalo Ads SDK nếu được nền tảng cấp phép.",
+          "checkType": "code_regex",
+          "violation": "Treo banner quảng cáo Google AdSense hoặc banner ngoài."
+        },
+        {
+          "id": "CONTENT_05_NO_VIRTUAL_ITEMS",
+          "title": "Không bán vật phẩm ảo, tiền ảo/NFT hoặc nội dung số chưa cấp phép",
+          "severity": "CRITICAL",
+          "description": "Không mua bán vật phẩm ảo trong game, tiền điện tử, NFT, khóa học số/gói phim nhạc chưa cấp phép. Giao dịch mua sắm phải gắn với hàng hóa/dịch vụ thực tế (giặt sấy, tủ đồ, đồ dùng...).",
+          "checkType": "manual",
+          "violation": "Bán vật phẩm ảo, coin, NFT hoặc khóa học online trái quy định."
+        },
+        {
+          "id": "CONTENT_06_NO_CASHOUT_REWARD",
+          "title": "Không có tính năng Rút tiền / Trả thưởng",
+          "severity": "CRITICAL",
+          "pattern": "(rút tiền|rut tien|tra thuong|trả thưởng|cashout|redeem reward)",
+          "description": "Mini App tuyệt đối không được có tính năng liên quan đến rút tiền mặt, đổi thưởng ra tiền mặt.",
+          "checkType": "code_and_ui",
+          "violation": "Có tính năng rút tiền, trả thưởng mặt."
+        },
+        {
+          "id": "CONTENT_07_NO_SOCIAL_COMPETITION",
+          "title": "Không làm mạng xã hội hoặc cạnh tranh trực tiếp hệ sinh thái Zalo",
+          "severity": "CRITICAL",
+          "description": "Không xây dựng tính năng mạng xã hội (đăng post, newsfeed, like, comment) hoặc dịch vụ cạnh tranh trực tiếp với sản phẩm Zalo (Zing MP3, Zalo chat/gọi).",
+          "checkType": "manual",
+          "violation": "Có tính năng newsfeed mạng xã hội hoặc cạnh tranh chat/nhạc với Zalo."
+        },
+        {
+          "id": "CONTENT_08_UI_QUALITY",
+          "title": "Hình ảnh và văn bản rõ ràng, không lỗi font, không vỡ layout",
+          "severity": "ERROR",
+          "description": "Hình ảnh phải tải được, không bị lỗi 404, văn bản không bị lỗi font hoặc khó đọc trên các kích thước màn hình.",
+          "checkType": "manual_and_build",
+          "violation": "Ảnh vỡ, lỗi font chữ tiếng Việt."
+        },
+        {
+          "id": "CONTENT_09_POLICY_TERMS",
+          "title": "Chính sách - Điều khoản rõ ràng, chỉ rõ đơn vị sở hữu",
+          "severity": "WARNING",
+          "description": "Văn bản Chính sách - Điều khoản phải thể hiện rõ: 'Chính sách điều khoản của Mini App [Tên App] thuộc [Đơn vị/Cá nhân sở hữu]', không dùng văn bản chung chung.",
+          "checkType": "manual",
+          "violation": "Điều khoản chung chung không nêu tên đơn vị vận hành."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Hiệu suất Mini App",
+      "rules": [
+        {
+          "id": "PERF_01_NO_DEMO_FEATURE",
+          "title": "Tất cả tính năng phải hoạt động bình thường, không để Demo",
+          "severity": "CRITICAL",
+          "pattern": "(tính năng đang phát triển|coming soon|demo mode|tính năng thử nghiệm)",
+          "description": "Các tính năng đưa lên duyệt phải hoạt động thật, không để trạng thái Demo, nút bấm không hoạt động hoặc màn hình Coming Soon.",
+          "checkType": "code_regex_and_ui",
+          "violation": "Tính năng bị khóa, ghi 'Coming Soon' hoặc 'Demo'."
+        },
+        {
+          "id": "PERF_02_NO_CRASH_OR_BLANK",
+          "title": "Không xảy ra crash, treo, màn hình trắng / tối",
+          "severity": "CRITICAL",
+          "description": "Ứng dụng phải có Error Boundary, không crash màn hình trắng (White Screen of Death) khi có lỗi mạng hoặc dữ liệu trống.",
+          "checkType": "runtime_and_audit",
+          "violation": "App bị crash màn hình trắng khi mở."
+        },
+        {
+          "id": "PERF_03_LOAD_TIME",
+          "title": "Thời gian tải trang < 1.5s, LCP < 2.5s, tính năng < 10s",
+          "severity": "WARNING",
+          "metrics": {
+            "pageLoadTimeMaxSec": 1.5,
+            "lcpMaxSec": 2.5,
+            "featureActionTimeoutSec": 10.0
+          },
+          "description": "Tối ưu dung lượng bundle, lazy load và CDN để thời gian tải trang dưới 1.5s và LCP dưới 2.5s.",
+          "checkType": "lighthouse_and_build",
+          "violation": "App tải quá chậm > 10s."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Xin quyền người dùng (Permissions & Consent)",
+      "rules": [
+        {
+          "id": "PERM_01_NO_AUTO_REQUEST_ON_LOAD",
+          "title": "Tuyệt đối không bật consent xin quyền ngay khi vừa vào Mini App",
+          "severity": "CRITICAL",
+          "description": "Không được gọi API xin quyền (SĐT, Vị trí, Thông tin cá nhân, Camera, OA...) trong useEffect lúc ứng dụng vừa khởi chạy. Phải chờ người dùng tương tác.",
+          "checkType": "code_ast",
+          "violation": "Vừa mở app đã nhảy popup xin quyền SĐT / Vị trí."
+        },
+        {
+          "id": "PERM_02_CONTEXTUAL_PERMISSION",
+          "title": "Xin quyền đúng ngữ cảnh và có giải thích rõ ràng",
+          "severity": "ERROR",
+          "description": "Chỉ xin quyền khi người dùng thực hiện một hành động cụ thể đòi hỏi quyền đó và có thông báo giải thích lý do cần quyền.",
+          "checkType": "manual_and_code",
+          "violation": "Xin quyền bất thình lình không rõ mục đích."
+        },
+        {
+          "id": "PERM_03_NO_FAKE_PLATFORM_UI",
+          "title": "Không giả mạo giao diện nền tảng để xin quyền",
+          "severity": "CRITICAL",
+          "description": "Sử dụng giao diện và dialog tiêu chuẩn của Zalo UI / ZaUI, không vẽ popup giả giao diện hệ thống để ép người dùng cấp quyền.",
+          "checkType": "manual",
+          "violation": "Tự dựng popup giao diện giống Zalo để lừa bấm cấp quyền."
+        },
+        {
+          "id": "PERM_04_NO_MANDATORY_PERMISSION",
+          "title": "Phải có lựa chọn Từ chối và vẫn dùng được tính năng khác",
+          "severity": "CRITICAL",
+          "description": "Khi người dùng nhấn Từ chối cấp quyền (SĐT, Vị trí...), ứng dụng không được chặn sử dụng mà phải cho phép trải nghiệm các tính năng không liên quan.",
+          "checkType": "code_and_ui",
+          "violation": "Chặn app, không cho dùng nếu người dùng bấm Từ chối cấp quyền."
+        },
+        {
+          "id": "PERM_05_NO_MANDATORY_LOGIN",
+          "title": "Cho phép trải nghiệm mà không bắt buộc đăng nhập / đăng ký",
+          "severity": "CRITICAL",
+          "description": "Khách vãng lai phải được xem nội dung và dùng thử các tính năng cơ bản mà không bắt buộc phải đăng nhập/đăng ký tài khoản trước (ngoại trừ app nội bộ doanh nghiệp/trường học).",
+          "checkType": "manual_and_code",
+          "violation": "Chặn màn hình bắt đăng nhập ngay khi mở app."
+        },
+        {
+          "id": "PERM_06_ACCOUNT_LINKING",
+          "title": "Cơ chế liên kết SĐT Zalo phải là 'Liên kết tài khoản' sau khi đăng nhập",
+          "severity": "WARNING",
+          "description": "Nếu liên kết SĐT Zalo với tài khoản sẵn có, phải đặt tên chức năng là 'Liên kết tài khoản' và chỉ gọi sau khi người dùng đăng nhập thành công.",
+          "checkType": "manual",
+          "violation": "Ép liên kết số điện thoại sai luồng."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Quyền riêng tư & Bảo mật",
+      "rules": [
+        {
+          "id": "PRIV_01_DATA_CONSENT",
+          "title": "Thu thập dữ liệu cá nhân có sự đồng ý minh bạch",
+          "severity": "CRITICAL",
+          "description": "Chỉ thu thập thông tin người dùng khi có sự đồng ý và minh bạch về mục đích sử dụng.",
+          "checkType": "manual",
+          "violation": "Âm thầm gửi dữ liệu cá nhân lên máy chủ khi chưa được cho phép."
+        },
+        {
+          "id": "PRIV_02_NO_MALWARE",
+          "title": "Không chứa mã độc hoặc liên kết nguy hại",
+          "severity": "CRITICAL",
+          "pattern": "(eval\\(|document\\.write\\(|<script[\\s\\S]*?src=['\"]http:)",
+          "description": "Mã nguồn không được chứa mã độc, eval nguy hiểm, chèn script lạ hoặc liên kết không an toàn.",
+          "checkType": "code_regex",
+          "violation": "Có chứa mã độc hại hoặc gọi liên kết không an toàn (HTTP thay vì HTTPS)."
+        },
+        {
+          "id": "PRIV_03_NO_UNAUTHORIZED_SHARING",
+          "title": "Không chia sẻ dữ liệu người dùng với bên thứ ba trái phép",
+          "severity": "CRITICAL",
+          "description": "Không tự ý chia sẻ dữ liệu thông tin cá nhân của người dùng cho bên thứ ba khi chưa được phép.",
+          "checkType": "manual",
+          "violation": "Chia sẻ trái phép dữ liệu người dùng."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Tích hợp Checkout SDK (Thanh toán)",
+      "rules": [
+        {
+          "id": "PAY_01_CHECKOUT_SDK_REQUIRED",
+          "title": "Phát sinh đơn hàng & hiển thị giá tiền bắt buộc dùng Checkout SDK",
+          "severity": "CRITICAL",
+          "description": "Mini App có phát sinh đơn hàng, có chức năng thanh toán và có hiển thị giá tiền trực tiếp bắt buộc phải tích hợp Checkout SDK của Zalo.",
+          "checkType": "code_and_config",
+          "violation": "Có giỏ hàng, hiển thị giá tiền thanh toán nhưng dùng cổng ngoài hoặc chuyển khoản mà không qua Checkout SDK."
+        },
+        {
+          "id": "PAY_02_NO_PRICE_WITHOUT_SDK",
+          "title": "Nếu chưa dùng Checkout SDK: Ẩn giá và đổi sang 'Liên hệ / Tư vấn'",
+          "severity": "CRITICAL",
+          "description": "Nếu chưa tích hợp Checkout SDK, Mini App không được hiển thị giá tiền của sản phẩm/dịch vụ và phải thay nút 'Mua hàng / Thanh toán' thành 'Liên hệ' hoặc 'Tư vấn'.",
+          "checkType": "manual_and_code",
+          "violation": "Để giá tiền và nút mua hàng khi chưa tích hợp Checkout SDK."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Khác & Vận hành",
+      "rules": [
+        {
+          "id": "OPS_01_MIN_TRAFFIC",
+          "title": "Duy trì tối thiểu 10 lượt truy cập/tháng",
+          "severity": "WARNING",
+          "description": "Mini App đã phát hành phải duy trì mức độ sử dụng tối thiểu 10 lượt truy cập/tháng để không bị hạn chế hiển thị hoặc vô hiệu hóa sau 3 tháng.",
+          "checkType": "analytics",
+          "violation": "Mini App bị bỏ rơi, dưới 10 lượt truy cập/tháng trong 3 tháng liên tiếp."
+        },
+        {
+          "id": "OPS_02_CONDITIONAL_BUSINESS",
+          "title": "Xác thực ngành nghề đặc thù và kinh doanh có điều kiện",
+          "severity": "CRITICAL",
+          "description": "Mini App thuộc nhóm ngành đặc thù (Dược, Mỹ phẩm, Thực phẩm chức năng, Tài chính, Y tế...) phải hoàn thành xác thực OA và nộp đầy đủ giấy phép hành nghề/kinh doanh theo quy định.",
+          "checkType": "manual_and_kyc",
+          "violation": "Kinh doanh thuốc/mỹ phẩm/tài chính nhưng chưa có giấy tờ xác thực chuyên ngành."
+        },
+        {
+          "id": "OPS_03_CAMPAIGN_EXPIRY",
+          "title": "Chiến dịch có thời hạn phải nêu rõ thời gian bắt đầu & kết thúc",
+          "severity": "WARNING",
+          "description": "Mini App chiến dịch (campaign/sự kiện) có thời hạn phải ghi rõ thời gian bắt đầu và kết thúc trong phần mô tả phiên bản gửi duyệt hoặc trực tiếp trên giao diện UI.",
+          "checkType": "manual",
+          "violation": "Mini App chiến dịch thời hạn nhưng không nêu rõ thời gian diễn ra."
+        }
+      ]
+    }
+  ]
+}

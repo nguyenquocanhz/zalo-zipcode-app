@@ -1,0 +1,459 @@
+/* ── Theme variables ── */
+:root {
+  --bg-page: #f5f6fa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f0f4ff;
+  --text-primary: #141415;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --border-color: #e9ebed;
+  --chip-gray-bg: #f0f0f0;
+  --chip-gray-color: #555555;
+  --chip-blue-bg: #e6f0ff;
+  --chip-blue-color: #0068ff;
+  --header-grad: linear-gradient(135deg, #0068ff 0%, #0a4fd6 100%);
+  --tab-btn-bg: #e9edf5;
+  --tab-btn-color: #333333;
+}
+
+body[zaui-theme="dark"],
+[data-theme="dark"] {
+  --bg-page: #121214;
+  --bg-card: #1c1d22;
+  --bg-subtle: #242731;
+  --text-primary: #f4f5f6;
+  --text-secondary: #a0a5b0;
+  --text-muted: #727680;
+  --border-color: #2e3036;
+  --chip-gray-bg: #2a2c32;
+  --chip-gray-color: #d1d5db;
+  --chip-blue-bg: #102a54;
+  --chip-blue-color: #52a0ff;
+  --header-grad: linear-gradient(135deg, #132a52 0%, #0d1a33 100%);
+  --tab-btn-bg: #25262c;
+  --tab-btn-color: #a0a5b0;
+}
+
+/* ── Base ── */
+.zipcode-page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* ── Header ── */
+.app-header {
+  background: var(--header-grad);
+  color: #fff;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  padding-bottom: 14px;
+}
+
+.header-title {
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.header-sub {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+/* ── Theme Toggle Button ── */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  padding: 4px 10px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:active {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0.95);
+}
+
+/* ── Tabs ── */
+.tab-switch {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: var(--tab-btn-bg) !important;
+  color: var(--tab-btn-color) !important;
+  border-radius: 10px !important;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn-active {
+  background: #0068ff !important;
+  color: #fff !important;
+}
+
+/* ── Province list ── */
+.province-item {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.province-item:active {
+  background: var(--bg-subtle) !important;
+}
+
+.badge-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.code-badge {
+  color: #0068ff !important;
+  font-weight: 700;
+  font-size: 13px !important;
+}
+
+body[zaui-theme="dark"] .code-badge,
+[data-theme="dark"] .code-badge {
+  color: #52a0ff !important;
+}
+
+.code-badge6 {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+
+/* ── Converter Widget ── */
+.converter-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-top: 16px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.converter-header {
+  margin-bottom: 6px;
+}
+
+.converter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.converter-input {
+  flex: 1;
+}
+
+.converter-btn {
+  flex-shrink: 0;
+  border-radius: 10px !important;
+  background: #0068ff !important;
+  color: #fff !important;
+  padding: 0 12px !important;
+}
+
+.converter-result {
+  margin-top: 10px;
+}
+
+.converter-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ── Copy Chips ── */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.chip-row.mt2 {
+  margin-top: 8px;
+}
+
+.copy-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s, transform 0.1s;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.copy-chip:active {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.chip-blue {
+  background: var(--chip-blue-bg);
+  color: var(--chip-blue-color);
+}
+
+.chip-blue .zaui-icon,
+.chip-blue i {
+  color: var(--chip-blue-color);
+}
+
+.chip-gray {
+  background: var(--chip-gray-bg);
+  color: var(--chip-gray-color);
+}
+
+.chip-gray .zaui-icon,
+.chip-gray i {
+  color: var(--chip-gray-color);
+}
+
+/* ── Expand Wards Button & Container ── */
+.expand-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--chip-blue-color);
+  cursor: pointer;
+  line-height: 1.2;
+  transition: opacity 0.15s;
+}
+
+.expand-btn:active {
+  opacity: 0.7;
+}
+
+.ward-list-box {
+  background: var(--bg-subtle);
+  border-left: 3px solid #0068ff;
+  margin: 4px 0 8px 12px;
+  border-radius: 0 8px 8px 0;
+  padding: 6px 10px;
+}
+
+.ward-item {
+  border-bottom: 1px dashed var(--border-color);
+  padding: 4px 0;
+}
+
+.ward-item:last-child {
+  border-bottom: none;
+}
+
+/* ── Post Office text ── */
+.po-text {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ── District Sheet & Smooth Scrolling Fix ── */
+.district-sheet {
+  .zaui-sheet-content {
+    height: 85vh !important;
+    max-height: 85vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    touch-action: pan-y !important;
+  }
+}
+
+.sheet-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.sheet-sticky-top {
+  flex-shrink: 0;
+  padding: 12px 16px 8px 16px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 5;
+}
+
+.sheet-count-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+.sheet-search-wrapper {
+  margin-top: 4px;
+}
+
+.sheet-scrollable-list {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  padding: 8px 16px 36px 16px;
+  overscroll-behavior: contain;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(140, 140, 140, 0.35);
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(140, 140, 140, 0.6);
+  }
+}
+
+/* ── Dark Mode Overrides for ZAUI Components ── */
+body[zaui-theme="dark"] .zaui-list,
+[data-theme="dark"] .zaui-list {
+  background: var(--bg-card) !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+body[zaui-theme="dark"] .zaui-list-item,
+[data-theme="dark"] .zaui-list-item {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+body[zaui-theme="dark"] .zaui-list-item-title,
+[data-theme="dark"] .zaui-list-item-title {
+  color: var(--text-primary) !important;
+}
+
+body[zaui-theme="dark"] .zaui-list-item-subtitle,
+[data-theme="dark"] .zaui-list-item-subtitle {
+  color: var(--text-muted) !important;
+}
+
+body[zaui-theme="dark"] .zaui-input,
+body[zaui-theme="dark"] .zaui-input-affix-wrapper,
+[data-theme="dark"] .zaui-input,
+[data-theme="dark"] .zaui-input-affix-wrapper {
+  background-color: #23252b !important;
+  border-color: #383b44 !important;
+  color: var(--text-primary) !important;
+}
+
+body[zaui-theme="dark"] .zaui-sheet-container,
+[data-theme="dark"] .zaui-sheet-container {
+  background: #1c1d22 !important;
+}
+
+body[zaui-theme="dark"] .zaui-sheet-title,
+[data-theme="dark"] .zaui-sheet-title {
+  color: var(--text-primary) !important;
+}
+
+body[zaui-theme="dark"] .sheet-sticky-top,
+[data-theme="dark"] .sheet-sticky-top {
+  background: #1c1d22 !important;
+}
+
+body[zaui-theme="dark"] .sheet-count-tag,
+[data-theme="dark"] .sheet-count-tag {
+  background: #2a2c35;
+  border-color: #383b44;
+}
+
+/* ── Explicit Styling for Select Options (USER RULE COMPLIANT) ── */
+select option,
+select.form-control option,
+.zaui-select option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  select option,
+  select.form-control option,
+  .zaui-select option {
+    background-color: #1c1d22;
+    color: #f4f5f6;
+  }
+}
+
+/* ── Misc ── */
+.field-label {
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  display: block;
+  font-weight: 500;
+}
+
+.hint-text {
+  display: block;
+  margin-top: 16px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.hint-inline {
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.error-text {
+  color: #e0433f;
+  display: block;
+}
+
+.empty-text {
+  color: var(--text-muted);
+  text-align: center;
+  display: block;
+  padding: 24px 0;
+}
+
+.result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: background 0.2s, border-color 0.2s;
+}

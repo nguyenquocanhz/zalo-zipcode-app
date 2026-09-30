@@ -1,0 +1,7 @@
+{
+  "name": "zipcode-lookup-mini-app",
+  "appId": "2522725584854781271",
+  "framework": "react",
+  "template": "zaui-blank",
+  "bundler": "vite"
+}
