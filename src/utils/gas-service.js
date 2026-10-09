@@ -10,16 +10,11 @@ const LAST_FETCH_KEY = "wren_gas_last_fetch_ts";
 // RON 97 đã bỏ khỏi app; lọc thêm ở đây vì feed từ xa hoặc cache cũ có thể còn mặt hàng này
 const dropRemoved = (products) => products.filter((p) => p.id !== "ron97");
 
-// Danh sách endpoint ưu tiên: Cloudflare Worker (cloudflare/zaloapp-worker) -> Go Backend local dev -> feed GitHub (jsDelivr, raw) -> JSON đi kèm bản build.
-// Feed GitHub do GitHub Action scripts/gas-updater cập nhật từ thông cáo Petrolimex.
+// Danh sách endpoint ưu tiên: feed GitHub (raw, rồi jsDelivr) -> JSON đi kèm bản build.
+// Chỉ dùng CDN công khai, không gọi domain API riêng. Feed do GitHub Action scripts/gas-updater cập nhật từ thông cáo Petrolimex.
 const FEED_ENDPOINTS = [
-  { url: "https://zaloapp.vietcode.io.vn/api/gas/prices", label: "Cloudflare (zaloapp.vietcode.io.vn)" },
-  // Chỉ thử backend local khi chạy dev, không gọi localhost trên máy người dùng
-  ...(typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname)
-    ? [{ url: "http://localhost:8088/api/gas/prices", label: "Go Backend (Homelab :8088)" }]
-    : []),
-  { url: "https://cdn.jsdelivr.net/gh/nguyenquocanhz/zalo-zipcode-app@main/gas-price-latest.json", label: "CDN jsDelivr" },
   { url: "https://raw.githubusercontent.com/nguyenquocanhz/zalo-zipcode-app/main/gas-price-latest.json", label: "GitHub" },
+  { url: "https://cdn.jsdelivr.net/gh/nguyenquocanhz/zalo-zipcode-app@main/gas-price-latest.json", label: "CDN jsDelivr" },
   { url: "./gas-price-latest.json", label: "Dữ liệu đóng gói" },
   { url: "/gas-price-latest.json", label: "Dữ liệu đóng gói" },
 ];
@@ -85,10 +80,8 @@ export async function fetchLatestGasData() {
 
       const res = await fetch(fetchUrl, {
         signal: controller.signal,
-        headers: {
-          Accept: "application/json",
-          "X-Zalo-MiniApp-Id": "2522725584854781271",
-        },
+        // Chỉ gửi header đơn giản: header tuỳ biến sẽ kích hoạt CORS preflight mà CDN từ chối
+        headers: { Accept: "application/json" },
       });
       clearTimeout(timeoutId);
 

@@ -397,10 +397,10 @@ export default function GasPriceTab() {
                 <Box flex alignItems="center" style={{ gap: 4 }}>
                   <Icon icon="zi-cloud" size={13} className="text-blue" />
                   <Text size="xxSmall" className="text-muted">
-                    Nguồn API: <strong>{gasData.backendSource}</strong>
+                    Nguồn dữ liệu: <strong>{gasData.backendSource}</strong>
                   </Text>
                 </Box>
-                {gasData.serverInfo?.status === "online" && !gasData.fromCache && (
+                {gasData.isLive && !gasData.fromCache && gasData.backendSource !== "Dữ liệu đóng gói" && (
                   <span className="live-badge">
                     ● Live
                   </span>
