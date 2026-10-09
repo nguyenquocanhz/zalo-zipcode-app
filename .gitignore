@@ -41,3 +41,6 @@ Thumbs.db
 
 # ZMP cache and temporary build artifacts
 .zmp/
+
+# Cấu hình Worker có domain thật
+wrangler.local.toml

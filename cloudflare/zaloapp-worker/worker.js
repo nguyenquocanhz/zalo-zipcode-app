@@ -1,5 +1,5 @@
 /**
- * WrenApp API trên Cloudflare Workers — https://zaloapp.vietcode.io.vn
+ * WrenApp API trên Cloudflare Workers (domain cấu hình trong wrangler.local.toml)
  *
  * Trả giá xăng dầu cho Mini App từ feed gas-price-latest.json trên GitHub (do GitHub Action
  * scripts/gas-updater cập nhật từ thông cáo Petrolimex). Feed được cache ở edge 5 phút.
@@ -17,7 +17,7 @@ const DEFAULT_FEED_URLS = [
   "https://cdn.jsdelivr.net/gh/nguyenquocanhz/zalo-zipcode-app@main/gas-price-latest.json",
 ];
 const CACHE_TTL_SECONDS = 300;
-const CACHE_KEY = "https://zaloapp.vietcode.io.vn/__cache/gas-feed";
+const CACHE_PATH = "/__cache/gas-feed";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -61,8 +61,9 @@ async function fetchRemoteFeed(urls) {
 }
 
 /** Feed từ cache edge; hết hạn thì tải lại; không tải được thì dùng bản đóng gói */
-async function getFeed(env, ctx, { refresh = false } = {}) {
+async function getFeed(request, env, ctx, { refresh = false } = {}) {
   const cache = caches.default;
+  const CACHE_KEY = new URL(CACHE_PATH, request.url).toString();
   if (!refresh) {
     const hit = await cache.match(CACHE_KEY);
     if (hit) return { ...(await hit.json()), cache: "HIT" };
@@ -81,12 +82,12 @@ async function getFeed(env, ctx, { refresh = false } = {}) {
   return { feed: bundledFeed, origin: "bundled", fetchedAt: null, cache: "FALLBACK" };
 }
 
-function withServerInfo(feed, meta) {
+function withServerInfo(feed, meta, request) {
   return {
     ...feed,
     serverInfo: {
       nodeId: "cloudflare-worker",
-      domain: "zaloapp.vietcode.io.vn",
+      domain: new URL(request.url).hostname,
       version: "1.0.0-worker",
       status: meta.origin === "bundled" ? "fallback" : "online",
       timestamp: new Date().toISOString(),
@@ -107,23 +108,23 @@ export default {
     }
 
     if (pathname === "/api/gas/prices" && request.method === "GET") {
-      const meta = await getFeed(env, ctx);
-      return json(withServerInfo(meta.feed, meta), 200, { "X-Feed-Cache": meta.cache });
+      const meta = await getFeed(request, env, ctx);
+      return json(withServerInfo(meta.feed, meta, request), 200, { "X-Feed-Cache": meta.cache });
     }
 
     if (pathname === "/api/gas/history" && request.method === "GET") {
-      const meta = await getFeed(env, ctx);
+      const meta = await getFeed(request, env, ctx);
       const history = meta.feed.history || [];
       return json({ total: history.length, history });
     }
 
     if (pathname === "/api/gas/refresh" && (request.method === "POST" || request.method === "GET")) {
-      const meta = await getFeed(env, ctx, { refresh: true });
+      const meta = await getFeed(request, env, ctx, { refresh: true });
       return json(
         {
           success: meta.origin !== "bundled",
           message: meta.origin !== "bundled" ? "Đã tải lại feed giá xăng dầu" : "Không tải được feed, đang dùng bản đóng gói",
-          data: withServerInfo(meta.feed, meta),
+          data: withServerInfo(meta.feed, meta, request),
         },
         meta.origin !== "bundled" ? 200 : 502,
         { "Cache-Control": "no-store" }

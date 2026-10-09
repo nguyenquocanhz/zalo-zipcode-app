@@ -2,7 +2,7 @@
 
 Go microservice phục vụ API động cho Zalo Mini App **WrenApp** (Tra cứu mã bưu chính & Giá xăng dầu Việt Nam).
 
-- **Domain sản xuất:** `https://zaloapp.vietcode.io.vn`
+- **Domain sản xuất:** đặt qua biến môi trường `DOMAIN` trong `backend-go/.env` (không commit)
 - **Cổng nội bộ:** `8088`
 - **Công nghệ:** Go 1.23+, `robfig/cron/v3` (Daily Cron & Thursday Flash Cron), Docker multi-stage build (< 15MB)
 
@@ -29,7 +29,7 @@ Backend chỉ nhận feed khi hợp lệ (đủ mặt hàng, giá trong khoảng
 | **Interval** | `@every 60m` | Mỗi `CRAWLER_INTERVAL_MINUTES` phút | Bắt kỳ điều chỉnh bất thường |
 | **Startup Sync** | Khởi động container | Sau 2s khi boot | Server vừa bật là có dữ liệu mới nhất |
 
-> Lịch và `GAS_FEED_URL` tùy biến qua biến môi trường trong `docker-compose.yml`. Domain `zaloapp.vietcode.io.vn` hiện trỏ về Cloudflare Worker (`cloudflare/zaloapp-worker`), không phải backend Go.
+> Lịch và `GAS_FEED_URL` tùy biến qua biến môi trường trong `docker-compose.yml`. Domain công khai hiện trỏ về Cloudflare Worker (`cloudflare/zaloapp-worker`), không phải backend Go.
 
 ---
 
@@ -97,16 +97,16 @@ docker compose logs -f zaloapp-backend | grep -E "CronJob|Crawler"
 
 ---
 
-## 5. Cấu Hình Tên Miền `zaloapp.vietcode.io.vn`
+## 5. Cấu Hình Tên Miền
 
 ### Phương án A: Tự động cấp SSL với Caddy Profile
 ```bash
 docker compose --profile with-ssl up -d
 ```
-File `Caddyfile` đã cấu hình sẵn tự động xin chứng chỉ Let's Encrypt SSL cho `zaloapp.vietcode.io.vn`.
+File `Caddyfile` đã cấu hình sẵn tự động xin chứng chỉ Let's Encrypt SSL cho domain trong biến `DOMAIN`.
 
 ### Phương án B: Cloudflare Tunnel (Khuyên dùng cho Homelab không mở port)
 ```bash
-cloudflared tunnel route dns <tunnel-name> zaloapp.vietcode.io.vn
+cloudflared tunnel route dns <tunnel-name> <domain>
 ```
 Trỏ service trong config tunnel về: `http://localhost:8088`.

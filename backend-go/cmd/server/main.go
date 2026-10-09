@@ -24,7 +24,6 @@ func main() {
 
 	log.Println("==================================================")
 	log.Println("  WRENAPP GOLANG BACKEND - HOMELAB MICROSERVICE   ")
-	log.Println("  Domain: zaloapp.vietcode.io.vn                  ")
 	log.Println("==================================================")
 
 	// 1. Tải cấu hình

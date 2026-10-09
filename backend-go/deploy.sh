@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script Triển Khai Nhanh GoLang Backend Lên Homelab (Docker Compose)
-# Domain: zaloapp.vietcode.io.vn
+# Domain: đặt qua biến DOMAIN trong backend-go/.env
 # ==============================================================================
 
 set -e
@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}======================================================${NC}"
 echo -e "${BLUE}  WRENAPP GOLANG BACKEND - HOMELAB DEPLOYMENT SCRIPT  ${NC}"
-echo -e "${BLUE}  Domain: zaloapp.vietcode.io.vn (Port 8088)          ${NC}"
+echo -e "${BLUE}  Domain: theo biến DOMAIN (Port 8088)                ${NC}"
 echo -e "${BLUE}======================================================${NC}\n"
 
 # 1. Kiểm tra Docker
@@ -42,7 +42,7 @@ echo -e "${GREEN}  ✓ TRIỂN KHAI THÀNH CÔNG LÊN HOMELAB!                 $
 echo -e "${GREEN}======================================================${NC}"
 echo -e "• Container: ${BLUE}zaloapp-backend${NC} (Status: ${GREEN}${HEALTH_STATUS}${NC})"
 echo -e "• Local URL: ${BLUE}http://localhost:8088/health${NC}"
-echo -e "• Public API: ${BLUE}https://zaloapp.vietcode.io.vn/api/gas/prices${NC}"
+echo -e "• Public API: ${BLUE}https://<DOMAIN>/api/gas/prices${NC}"
 echo -e "• Lịch Cronjob cào tự động: ${YELLOW}Mỗi ngày lúc 06:00 sáng${NC} + ${YELLOW}Thứ Năm 15:05${NC}"
 echo -e "\n${BLUE}Các lệnh quản trị hữu ích:${NC}"
 echo -e "  Xem logs trực tiếp:       ${YELLOW}docker compose logs -f${NC}"

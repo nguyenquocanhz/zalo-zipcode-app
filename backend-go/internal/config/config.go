@@ -23,7 +23,7 @@ type Config struct {
 // LoadConfig đọc cấu hình từ biến môi trường hoặc fallback mặc định
 func LoadConfig() *Config {
 	port := getEnv("PORT", "8088")
-	domain := getEnv("DOMAIN", "zaloapp.vietcode.io.vn")
+	domain := getEnv("DOMAIN", "localhost")
 	dataDir := getEnv("DATA_DIR", "./data")
 	nodeID := getEnv("NODE_ID", "homelab-node-01")
 	allowedOrigins := getEnv("ALLOWED_ORIGINS", "*")

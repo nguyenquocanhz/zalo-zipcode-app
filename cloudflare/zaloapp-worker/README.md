@@ -1,6 +1,8 @@
 # zaloapp-worker
 
-Cloudflare Worker `wrenapp-zaloapp`, chạy trên domain `https://zaloapp.vietcode.io.vn` (Custom Domain, zone `vietcode.io.vn`).
+Cloudflare Worker `wrenapp-zaloapp`, chạy trên một Custom Domain riêng.
+
+Domain thật không nằm trong repo: `wrangler.toml` là bản mẫu, cấu hình thật ở `wrangler.local.toml` (đã có trong `.gitignore`). Máy mới thì chép `wrangler.toml` thành `wrangler.local.toml` rồi sửa `pattern`.
 
 Trả giá xăng dầu cho Mini App từ `gas-price-latest.json` trên GitHub, cache ở edge 5 phút. Không tải được feed (hoặc feed sai) thì trả bản feed đóng gói lúc deploy; khi đó `serverInfo.status` là `fallback`.
 
@@ -15,7 +17,7 @@ Deploy lại (cập nhật code hoặc bản feed đóng gói):
 
 ```bash
 cd cloudflare/zaloapp-worker
-npx wrangler deploy
+npx wrangler deploy -c wrangler.local.toml
 ```
 
-Để Worker nhận giá ngay khi GitHub Action cập nhật feed, đặt biến repo `BACKEND_REFRESH_URL` = `https://zaloapp.vietcode.io.vn/api/gas/refresh`.
+Để Worker nhận giá ngay khi GitHub Action cập nhật feed, đặt biến repo `BACKEND_REFRESH_URL` = `https://<domain>/api/gas/refresh`.

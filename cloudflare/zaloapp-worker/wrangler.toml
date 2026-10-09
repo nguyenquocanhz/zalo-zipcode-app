@@ -1,11 +1,12 @@
-# Deploy lại: npx wrangler deploy (trong thư mục này)
+# Bản mẫu. Domain thật nằm trong wrangler.local.toml (không commit).
+# Deploy lại: npx wrangler deploy -c wrangler.local.toml (trong thư mục này)
 name = "wrenapp-zaloapp"
 main = "worker.js"
 compatibility_date = "2026-09-01"
 workers_dev = false
 
 routes = [
-  { pattern = "zaloapp.vietcode.io.vn", custom_domain = true }
+  { pattern = "api.example.com", custom_domain = true }
 ]
 
 # Nguồn feed, cách nhau bằng dấu phẩy. Bỏ trống thì dùng GitHub raw rồi jsDelivr.

@@ -12,7 +12,8 @@ services:
       - "8088:8088"
     environment:
       - PORT=8088
-      - DOMAIN=zaloapp.vietcode.io.vn
+      # Domain công khai đặt trong backend-go/.env (không commit)
+      - DOMAIN=${DOMAIN:-localhost}
       - NODE_ID=homelab-node-01
       - DATA_DIR=/app/data
       - TZ=Asia/Ho_Chi_Minh
@@ -50,6 +51,8 @@ services:
     restart: unless-stopped
     profiles:
       - with-ssl
+    environment:
+      - DOMAIN=${DOMAIN:?Đặt DOMAIN trong backend-go/.env}
     ports:
       - "80:80"
       - "443:443"

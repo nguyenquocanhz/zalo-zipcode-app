@@ -44,7 +44,6 @@ VOLUME ["/app/data"]
 EXPOSE 8088
 
 ENV PORT=8088 \
-    DOMAIN=zaloapp.vietcode.io.vn \
     DATA_DIR=/app/data \
     NODE_ID=homelab-node-01 \
     CRAWLER_INTERVAL_MINUTES=60 \

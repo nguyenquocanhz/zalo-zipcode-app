@@ -1,11 +1,11 @@
 # ==============================================================================
 # Script Triển Khai Nhanh GoLang Backend Lên Homelab (PowerShell)
-# Domain: zaloapp.vietcode.io.vn
+# Domain: đặt qua biến DOMAIN trong backend-go/.env
 # ==============================================================================
 
 Write-Host "======================================================" -ForegroundColor Cyan
 Write-Host "  WRENAPP GOLANG BACKEND - HOMELAB DEPLOYMENT SCRIPT  " -ForegroundColor Cyan
-Write-Host "  Domain: zaloapp.vietcode.io.vn (Port 8088)          " -ForegroundColor Cyan
+Write-Host "  Domain: theo biến DOMAIN (Port 8088)                " -ForegroundColor Cyan
 Write-Host "======================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -35,7 +35,7 @@ Write-Host "  ✓ TRIỂN KHAI THÀNH CÔNG LÊN HOMELAB!                 " -For
 Write-Host "======================================================" -ForegroundColor Green
 Write-Host "• Container:  zaloapp-backend" -ForegroundColor Cyan
 Write-Host "• Local URL:  http://localhost:8088/health" -ForegroundColor Cyan
-Write-Host "• Public API: https://zaloapp.vietcode.io.vn/api/gas/prices" -ForegroundColor Cyan
+Write-Host "• Public API: https://<DOMAIN>/api/gas/prices" -ForegroundColor Cyan
 Write-Host "• Cronjob:    Mỗi ngày lúc 06:00 sáng & Thứ Năm 15:05" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Các lệnh quản trị hữu ích:" -ForegroundColor Cyan

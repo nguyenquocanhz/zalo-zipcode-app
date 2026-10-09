@@ -21,7 +21,7 @@ func TestCalculatePreciseDistance(t *testing.T) {
 func TestGasService_SearchStationsEmergency(t *testing.T) {
 	cfg := &config.Config{
 		DataDir: t.TempDir(),
-		Domain:  "zaloapp.vietcode.io.vn",
+		Domain:  "api.example.com",
 		NodeID:  "test-node",
 	}
 

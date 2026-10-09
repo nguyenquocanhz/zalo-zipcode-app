@@ -1,8 +1,8 @@
 /**
- * WrenApp - Dịch vụ API Backend GoLang (Homelab: zaloapp.vietcode.io.vn)
+ * WrenApp - Dịch vụ API Backend GoLang
  * 
  * Kiến trúc Resilience:
- * 1. Gọi trực tiếp tới Go Backend tại https://zaloapp.vietcode.io.vn/api
+ * 1. Gọi tới Go Backend tại địa chỉ trong biến build VITE_API_BASE (bỏ trống thì không gọi)
  * 2. Nếu đang chạy dev nội bộ: Thử qua http://localhost:8088/api
  * 3. Nếu mạng lỗi/mất kết nối: Tự động Fallback về local cache (gas-data.js) 
  *    để ứng dụng không bao giờ bị sập hay treo trắng màn hình, tuân thủ 100% kiểm duyệt Zalo.
@@ -16,8 +16,8 @@ import {
   calculatePreciseDistance,
 } from "../utils/gas-data";
 
-// Điểm cuối chính thức trên Homelab
-export const PRODUCTION_API_BASE = "https://zaloapp.vietcode.io.vn/api";
+// Điểm cuối backend, đặt qua biến build VITE_API_BASE để không ghi domain vào mã nguồn
+export const PRODUCTION_API_BASE = import.meta.env.VITE_API_BASE || "";
 export const DEV_API_BASE = "http://localhost:8088/api";
 
 // Xác định API endpoint phù hợp
@@ -27,10 +27,10 @@ function getApiCandidates() {
 
   if (isDev) {
     // Trong môi trường dev: Ưu tiên local 8088 trước, rồi tới production homelab
-    return [DEV_API_BASE, PRODUCTION_API_BASE];
+    return [DEV_API_BASE, PRODUCTION_API_BASE].filter(Boolean);
   }
   // Môi trường Mini App thực tế: Gọi production homelab
-  return [PRODUCTION_API_BASE];
+  return [PRODUCTION_API_BASE].filter(Boolean);
 }
 
 // Helper fetch có timeout an toàn

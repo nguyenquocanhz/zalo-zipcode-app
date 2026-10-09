@@ -1,4 +1,5 @@
-zaloapp.vietcode.io.vn {
+# Domain lấy từ biến môi trường DOMAIN (đặt trong backend-go/.env)
+{$DOMAIN} {
     reverse_proxy 127.0.0.1:8088 {
         header_up Host {host}
         header_up X-Real-IP {remote}
