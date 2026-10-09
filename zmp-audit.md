@@ -128,5 +128,8 @@ npm run audit
 ```
 hoặc
 ```bash
-node zmp-audit.js
+node zmp-audit.js          # báo cáo chữ
+node zmp-audit.js --json   # báo cáo JSON
 ```
+
+`zmp-audit.js` là bản sinh tự động từ `zmp-mcp` (`src/policy/engine.ts`), cùng engine với tool MCP `zmp_policy_audit`. Đừng sửa tay: sửa luật trong `zmp-mcp`, build lại rồi chép `dist/zmp-audit.cjs` đè lên. Lệnh thoát mã 1 khi có vi phạm, nên dùng được trong CI.

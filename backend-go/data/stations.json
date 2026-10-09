@@ -1,0 +1,297 @@
+[
+  {
+    "id": "petro_binhtan_03",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Tên Lửa - Khu Tên Lửa (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 121 Đường Số 7, P. Bình Trị Đông B, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3751.5678",
+    "lat": 10.7588,
+    "lng": 106.6135,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay / MoMo",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_binhtan_01",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Số 14 - Kinh Dương Vương (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 440 Kinh Dương Vương, P. An Lạc, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3875.1234",
+    "lat": 10.7428,
+    "lng": 106.6172,
+    "fuels": [
+      "E10 RON 95-V",
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS",
+      "Cửa hàng tiện lợi"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "pvoil_binhtan_01",
+    "brand": "PVOIL",
+    "name": "Cửa hàng Xăng dầu PVOIL Lê Văn Quới (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 279 Lê Văn Quới, P. Bình Trị Đông, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3978.8999",
+    "lat": 10.7715,
+    "lng": 106.6162,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "PVOIL Easy",
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_binhtan_04",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Petrolimex Hương Lộ 2 (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 512 Hương Lộ 2, P. Bình Trị Đông A, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3877.2345",
+    "lat": 10.7645,
+    "lng": 106.6021,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cửa hàng Pmart"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_binhtan_02",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Số 39 - Quốc Lộ 1A (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 528 Quốc Lộ 1A, P. Bình Hưng Hòa B, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3750.6789",
+    "lat": 10.7925,
+    "lng": 106.5925,
+    "fuels": [
+      "E10 RON 95-V",
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.001S-V",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Cà thẻ POS",
+      "Trạm dừng nghỉ xe tải xe khách"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_binhtan_05",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Tân Kỳ Tân Quý (Bình Tân)",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Tân",
+    "address": "Số 620 Tân Kỳ Tân Quý, P. Bình Hưng Hòa, Quận Bình Tân, TP. Hồ Chí Minh",
+    "phone": "028.3765.4321",
+    "lat": 10.8035,
+    "lng": 106.6042,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "comeco_hcm_01",
+    "brand": "Comeco",
+    "name": "Cửa hàng Xăng dầu Comeco Số 03 - Hàng Xanh",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Bình Thạnh",
+    "address": "178/9 Điện Biên Phủ, Phường 21, Q. Bình Thạnh, TP. Hồ Chí Minh",
+    "phone": "028.3899.2345",
+    "lat": 10.7985,
+    "lng": 106.7112,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "comeco_hcm_02",
+    "brand": "Comeco",
+    "name": "Cửa hàng Xăng dầu Comeco Số 17 - Lê Trọng Tấn",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Tân Phú",
+    "address": "539 Lê Trọng Tấn, P. Sơn Kỳ, Q. Tân Phú, TP. Hồ Chí Minh",
+    "phone": "028.3816.5432",
+    "lat": 10.8142,
+    "lng": 106.6189,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "comeco_hcm_03",
+    "brand": "Comeco",
+    "name": "Cửa hàng Xăng dầu Comeco Số 7 - Lê Quang Sung",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Quận 6",
+    "address": "49C Lê Quang Sung, Phường 2, Quận 6, TP. Hồ Chí Minh",
+    "phone": "028.3855.6789",
+    "lat": 10.7512,
+    "lng": 106.6548,
+    "fuels": [
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR",
+      "Quét mã ZaloPay",
+      "Cà thẻ POS"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_hcm_01",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Số 01 - Hai Bà Trưng",
+    "province": "TP. Hồ Chí Minh",
+    "district": "Quận 1",
+    "address": "Số 136 Hai Bà Trưng, P. Đa Kao, Quận 1, TP. Hồ Chí Minh",
+    "phone": "028.3822.4567",
+    "lat": 10.7871,
+    "lng": 106.6978,
+    "fuels": [
+      "E10 RON 95-V",
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.001S-V",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR / ZaloPay",
+      "Cà thẻ Visa / Master / Napas",
+      "Trạm sạc xe điện"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  },
+  {
+    "id": "petro_hn_01",
+    "brand": "Petrolimex",
+    "name": "Cửa hàng Xăng dầu Số 1 - Trần Quang Khải",
+    "province": "Hà Nội",
+    "district": "Hoàn Kiếm",
+    "address": "Số 1 Trần Quang Khải, P. Tràng Tiền, Q. Hoàn Kiếm, Hà Nội",
+    "phone": "024.3825.2678",
+    "lat": 21.0265,
+    "lng": 105.857,
+    "fuels": [
+      "E10 RON 95-V",
+      "E10 RON 95-III",
+      "E5 RON 92",
+      "DO 0.001S-V",
+      "DO 0.05S"
+    ],
+    "services": [
+      "Chuyển khoản VietQR / ZaloPay",
+      "Cà thẻ POS / Napas",
+      "Cửa hàng tiện lợi"
+    ],
+    "open247": true,
+    "hasBankTransfer": true,
+    "hasQrPayment": true,
+    "hasCardPos": true,
+    "hasRon97": false
+  }
+]

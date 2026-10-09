@@ -1,0 +1,65 @@
+services:
+  # ========================================================
+  # Dịch vụ Go Backend: API Server & Cronjob tự động cào
+  # ========================================================
+  zaloapp-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: zaloapp-backend
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    environment:
+      - PORT=8088
+      - DOMAIN=zaloapp.vietcode.io.vn
+      - NODE_ID=homelab-node-01
+      - DATA_DIR=/app/data
+      - TZ=Asia/Ho_Chi_Minh
+      # Feed giá do GitHub Action scripts/gas-updater cập nhật từ thông cáo Petrolimex
+      - GAS_FEED_URL=https://raw.githubusercontent.com/nguyenquocanhz/zalo-zipcode-app/main/gas-price-latest.json
+      # Đồng bộ feed lúc 08:00 mỗi ngày (sau lượt quét 07:30 của GitHub Action)
+      - DAILY_CRON_SCHEDULE=0 8 * * *
+      # Kỳ điều hành Thứ Năm: 10 phút một lần từ 15:00 tới 18:59
+      - THURSDAY_CRON_SCHEDULE=*/10 15-18 * * 4
+      # Đồng bộ định kỳ mỗi 60 phút
+      - CRAWLER_INTERVAL_MINUTES=60
+      # Đồng bộ ngay 1 lần khi khởi động container
+      - CRAWL_ON_STARTUP=true
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8088/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================================
+  # (Tùy chọn) Caddy Reverse Proxy: Tự động cấp SSL Let's Encrypt
+  # Sử dụng: docker compose --profile with-ssl up -d
+  # ========================================================
+  caddy:
+    image: caddy:2-alpine
+    container_name: zaloapp-caddy
+    restart: unless-stopped
+    profiles:
+      - with-ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - zaloapp-backend
+
+volumes:
+  caddy_data:
+  caddy_config:

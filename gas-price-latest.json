@@ -1,0 +1,161 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-10-02T15:13:03.120Z",
+  "updateInfo": {
+    "effectiveDate": "01/10/2026",
+    "effectiveTime": "15:00:00",
+    "announcedBy": "Liên Bộ Công Thương - Tài chính / Petrolimex",
+    "nextExpectedDate": "08/10/2026",
+    "status": "Áp dụng kỳ mới nhất",
+    "sourceUrl": "https://www.petrolimex.com.vn"
+  },
+  "products": [
+    {
+      "id": "ron95_5",
+      "name": "Xăng E10 RON 95-V",
+      "shortName": "E10 RON 95-V",
+      "category": "gasoline",
+      "unit": "đồng/lít",
+      "priceZone1": 28180,
+      "priceZone2": 28740,
+      "diff": 100,
+      "diffPercent": 0.36,
+      "badge": "Euro 5 Cao cấp",
+      "badgeType": "primary",
+      "desc": "Xăng sinh học E10 tiêu chuẩn khí thải Euro 5 cao cấp của Petrolimex, bảo vệ động cơ xe ga & ô tô đời mới",
+      "popular": false
+    },
+    {
+      "id": "ron95_3",
+      "name": "Xăng E10 RON 95-III",
+      "shortName": "E10 RON 95-III",
+      "category": "gasoline",
+      "unit": "đồng/lít",
+      "priceZone1": 27180,
+      "priceZone2": 27720,
+      "diff": 100,
+      "diffPercent": 0.37,
+      "badge": "Phổ biến nhất",
+      "badgeType": "success",
+      "desc": "Xăng sinh học E10 thay thế chính thức RON 95 truyền thống toàn quốc từ 01/06/2026 (Thông tư 50/2025/TT-BCT)",
+      "popular": true
+    },
+    {
+      "id": "e5_ron92",
+      "name": "Xăng E5 RON 92-II",
+      "shortName": "E5 RON 92",
+      "category": "gasoline",
+      "unit": "đồng/lít",
+      "priceZone1": 26560,
+      "priceZone2": 27090,
+      "diff": 170,
+      "diffPercent": 0.64,
+      "badge": "Sinh học tiết kiệm",
+      "badgeType": "info",
+      "desc": "Xăng sinh học pha 5% ethanol, tối ưu chi phí cho xe máy số (Wave Alpha, Sirius, Blade)",
+      "popular": true
+    },
+    {
+      "id": "diesel_5",
+      "name": "Dầu Diesel 0.001S-V (DO 5)",
+      "shortName": "DO 0.001S-V",
+      "category": "diesel",
+      "unit": "đồng/lít",
+      "priceZone1": 31110,
+      "priceZone2": 31730,
+      "diff": -980,
+      "diffPercent": -3.05,
+      "badge": "Diesel Euro 5",
+      "badgeType": "warning",
+      "desc": "Dầu Diesel cao cấp hàm lượng lưu huỳnh cực thấp, bảo vệ kim phun và bộ lọc hạt DPF ô tô máy dầu thế hệ mới",
+      "popular": false
+    },
+    {
+      "id": "diesel_2",
+      "name": "Dầu Diesel 0.05S-II (DO)",
+      "shortName": "DO 0.05S",
+      "category": "diesel",
+      "unit": "đồng/lít",
+      "priceZone1": 29710,
+      "priceZone2": 30300,
+      "diff": -780,
+      "diffPercent": -2.56,
+      "badge": "Dầu phổ thông",
+      "badgeType": "warning",
+      "desc": "Dầu Diesel thông dụng cho xe tải, xe bán tải (Ranger, Hilux, Fortuner), xe khách và máy móc",
+      "popular": true
+    },
+    {
+      "id": "kerosene",
+      "name": "Dầu hỏa 2-K (Kerosene)",
+      "shortName": "Dầu hỏa",
+      "category": "other",
+      "unit": "đồng/lít",
+      "priceZone1": 29770,
+      "priceZone2": 30360,
+      "diff": -250,
+      "diffPercent": -0.83,
+      "badge": "Dân dụng",
+      "badgeType": "default",
+      "desc": "Dầu hỏa dân dụng dùng cho mục đích thắp sáng, sưởi ấm, đun nấu và sản xuất công nghiệp",
+      "popular": false
+    },
+    {
+      "id": "mazut",
+      "name": "Dầu Mazut N°2B (3,5S)",
+      "shortName": "Mazut N°2B",
+      "category": "other",
+      "unit": "đồng/kg",
+      "priceZone1": 20390,
+      "priceZone2": 20790,
+      "diff": 920,
+      "diffPercent": 4.73,
+      "badge": "Công nghiệp",
+      "badgeType": "default",
+      "desc": "Nhiên liệu đốt lò hơi nhà máy nhiệt điện, lò sấy công nghiệp, tàu biển",
+      "popular": false
+    }
+  ],
+  "history": [
+    {
+      "date": "01/10/2026",
+      "ron95": 27180,
+      "e5": 26560,
+      "diesel": 29710,
+      "trend": "up",
+      "note": "Xăng E10 tăng 100đ, Dầu DO giảm 780đ"
+    },
+    {
+      "date": "24/09/2026",
+      "ron95": 27080,
+      "e5": 26390,
+      "diesel": 30490,
+      "trend": "up",
+      "note": "Xăng E10 tăng 1.450đ, Dầu DO tăng 550đ"
+    },
+    {
+      "date": "17/09/2026",
+      "ron95": 25630,
+      "e5": 25130,
+      "diesel": 29940,
+      "trend": "up",
+      "note": "Xăng E10 tăng 1.400đ, Dầu DO tăng 1.460đ"
+    },
+    {
+      "date": "10/09/2026",
+      "ron95": 24230,
+      "e5": 23740,
+      "diesel": 28480,
+      "trend": "up",
+      "note": "Xăng E10 tăng 960đ, Dầu DO tăng 740đ"
+    },
+    {
+      "date": "03/09/2026",
+      "ron95": 23270,
+      "e5": 22480,
+      "diesel": 27740,
+      "trend": "up",
+      "note": "Xăng E10 tăng 670đ, Dầu DO giảm 340đ"
+    }
+  ]
+}

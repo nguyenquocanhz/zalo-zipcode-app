@@ -22,11 +22,12 @@ Bộ kỹ năng kiểm định và chuẩn bị phát hành Zalo Mini App theo t
 > ⚠️ **Quy tắc bất di bất dịch:** Nếu có bất kỳ lỗi ĐỎ nào xuất hiện, DỪNG LẠI NGAY LẬP TỨC và chuyển sang Bước 2. Tuyệt đối không nhảy cóc sang Bước 3!
 
 1. **Kiểm tra Cấu hình Tên & Logo:**
-   - Kiểm tra `app.title` trong `app-config.json`: Không ALL CAPS, không từ cấm ("Zalo", "Mini App"), không emoji/ký tự lạ, phải có tên chủ thể.
+   - Kiểm tra `app.title` trong `app-config.json`: Không ALL CAPS, không từ cấm ("Zalo", "Mini App", "App"), không emoji/ký tự lạ, phải có tên chủ thể, và trùng với `app.json` và `<title>` của `index.html`.
    - Kiểm tra Logo: Đảm bảo có nền màu đặc (solid background), không chứa số điện thoại hoặc mã QR code.
 2. **Quét Mã Nguồn Bằng Công Cụ Tự Động:**
    - Chạy lệnh kiểm tra tĩnh: `node zmp-audit.js` (hoặc `npm run audit`).
-   - Nếu MCP Server `zmp-mcp` khả dụng, gọi tool: `zmp_validate_project` và `zmp_owasp_audit`.
+   - Nếu MCP Server `zmp-mcp` khả dụng, gọi tool: `zmp_policy_audit` (chính sách kiểm duyệt, cùng engine với `zmp-audit.js`), `zmp_validate_project` và `zmp_owasp_audit`.
+   - Mã thoát 1 = có vi phạm. Kết quả luôn kèm mục "Cần kiểm tay" (logo, mô tả, dữ liệu thật): engine không thay được bước soi bằng mắt.
 3. **Đối chiếu 9 Nhóm Tiêu Chí:**
    - Tra cứu chi tiết tại context pointer: [censorship-rubric.md](references/censorship-rubric.md).
 

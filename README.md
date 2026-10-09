@@ -1,4 +1,4 @@
-# WrenApp - Tra cứu Mã Bưu Chính (Zalo Mini App)
+# Tra cứu bưu chính và giá xăng By Wren (Zalo Mini App)
 
 [![Zalo Mini App](https://img.shields.io/badge/Platform-Zalo%20Mini%20App-0068FF?logo=zalo)](https://miniapp.zalo.me)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react)](https://reactjs.org/)
@@ -7,7 +7,7 @@
 [![Audit Status](https://img.shields.io/badge/ZMP%20Audit-100%25%20PASS-brightgreen)](zmp-audit.md)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **WrenApp - Tra cứu mã bưu chính** là ứng dụng Zalo Mini App chuyên dụng tra cứu mã bưu chính (ZIP/Postal Code) chính xác, nhanh chóng cho toàn bộ **63 Tỉnh/Thành phố Việt Nam** và hơn **60 Quốc gia trên thế giới**. 
+> **Tra cứu bưu chính và giá xăng By Wren** là ứng dụng Zalo Mini App chuyên dụng tra cứu mã bưu chính (ZIP/Postal Code) chính xác, nhanh chóng cho toàn bộ **63 Tỉnh/Thành phố Việt Nam** và hơn **60 Quốc gia trên thế giới**, tích hợp bảng giá xăng dầu cập nhật liên tục từ Petrolimex, bản đồ trạm xăng GPS và máy tính chi phí nhiên liệu. 
 > 
 > Dự án được tích hợp sẵn bộ kiểm thử kiểm duyệt tự động **`zmp-audit`**, ma trận đánh giá **4-Gate Pivot Test** chuẩn theo thông số kỹ thuật **`zmp-mcp`**, và bộ tài liệu hướng dẫn phát hành thần tốc (Fast-track MVP Release) theo triết lý *Divide & Conquer*.
 

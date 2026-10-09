@@ -2,14 +2,21 @@
   "name": "wrenapp-zalo-zipcode",
   "version": "1.0.0",
   "private": true,
-  "description": "WrenApp - Tra cứu mã bưu chính (ZIP Code) Việt Nam (63 tỉnh thành) & Quốc tế (60 quốc gia) trên nền tảng Zalo Mini App",
+  "description": "Tra cứu bưu chính và giá xăng By Wren - Tra cứu Mã Bưu Chính (63 tỉnh & quốc tế) và Giá Xăng Dầu (Vùng 1 & 2, máy tính tiền xăng) trên Zalo Mini App",
   "scripts": {
     "start": "zmp start",
+    "login": "node scripts/zmp-auto-login.js",
     "deploy": "node run_deploy.js",
-    "build": "vite build",
+    "build": "vite build && node sync_assets.js",
     "audit": "node zmp-audit.js",
+    "test": "node test_zcode_pivot.js && node zmp-audit.js && node --test scripts/gas-updater/test.js",
     "test:pivot": "node test_zcode_pivot.js",
-    "webhook": "node webhook-server.js"
+    "webhook": "node webhook-server.js",
+    "gas:update": "node scripts/gas-updater/update.js",
+    "gas:dry": "node scripts/gas-updater/update.js --dry-run --force",
+    "gas:test": "node --test scripts/gas-updater/test.js",
+    "bot:connect": "node scripts/connect-bot.js",
+    "login:auto": "node scripts/zmp-auto-login.js"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -20,6 +27,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
+    "playwright": "^1.63.0",
     "sass": "^1.69.5",
     "vite": "^4.5.0",
     "zmp-cli": "^4.0.3"

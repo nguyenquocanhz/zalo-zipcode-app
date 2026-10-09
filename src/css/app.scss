@@ -14,6 +14,12 @@
   --header-grad: linear-gradient(135deg, #0068ff 0%, #0a4fd6 100%);
   --tab-btn-bg: #e9edf5;
   --tab-btn-color: #333333;
+  --color-success: #027a48;
+  --bg-success: #e6f9ed;
+  --color-error: #b42318;
+  --bg-error: #fee4e2;
+  --color-warning: #d9480f;
+  --bg-warning: #fff4ed;
 }
 
 body[zaui-theme="dark"],
@@ -32,6 +38,41 @@ body[zaui-theme="dark"],
   --header-grad: linear-gradient(135deg, #132a52 0%, #0d1a33 100%);
   --tab-btn-bg: #25262c;
   --tab-btn-color: #a0a5b0;
+  --color-success: #34d399;
+  --bg-success: #0c331e;
+  --color-error: #f87171;
+  --bg-error: #3d1413;
+  --color-warning: #ff922b;
+  --bg-warning: #3b190c;
+}
+
+/* ── Utility Status & Semantic Classes ── */
+.text-blue {
+  color: var(--chip-blue-color) !important;
+}
+.text-error {
+  color: var(--color-error) !important;
+}
+.text-warning {
+  color: var(--color-warning) !important;
+}
+.text-success {
+  color: var(--color-success) !important;
+}
+.text-muted {
+  color: var(--text-muted) !important;
+}
+.header-icon {
+  color: #fff !important;
+  margin-right: 8px;
+}
+.live-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: var(--bg-success);
+  color: var(--color-success);
+  font-weight: 600;
 }
 
 /* ── Base ── */
@@ -83,11 +124,43 @@ body[zaui-theme="dark"],
   transform: scale(0.95);
 }
 
+/* ── Main Module Navigation (Mã Bưu Chính vs Giá Xăng Dầu) ── */
+.main-module-switch {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.main-nav-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    box-shadow: 0 3px 8px rgba(0, 104, 255, 0.3);
+  }
+}
+
 /* ── Tabs ── */
 .tab-switch {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 
@@ -403,17 +476,31 @@ body[zaui-theme="dark"] .sheet-count-tag,
 /* ── Explicit Styling for Select Options (USER RULE COMPLIANT) ── */
 select option,
 select.form-control option,
+.gas-custom-select option,
 .zaui-select option {
   background-color: var(--bg-card);
   color: var(--text-primary);
 }
 
+[data-theme="dark"] select option,
+[data-theme="dark"] select.form-control option,
+[data-theme="dark"] .gas-custom-select option,
+[data-theme="dark"] .zaui-select option,
+body[zaui-theme="dark"] select option,
+body[zaui-theme="dark"] select.form-control option,
+body[zaui-theme="dark"] .gas-custom-select option,
+body[zaui-theme="dark"] .zaui-select option {
+  background-color: #1c1d22 !important;
+  color: #f4f5f6 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   select option,
   select.form-control option,
+  .gas-custom-select option,
   .zaui-select option {
-    background-color: #1c1d22;
-    color: #f4f5f6;
+    background-color: #1c1d22 !important;
+    color: #f4f5f6 !important;
   }
 }
 
@@ -457,3 +544,938 @@ select.form-control option,
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: background 0.2s, border-color 0.2s;
 }
+
+/* ═════════════════════════════════════════════════════════════════
+   WRENAPP - TRA CỨU GIÁ XĂNG DẦU (GAS PRICE MODULE STYLING)
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── Gas Subtabs ── */
+.gas-subtabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 12px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.gas-subtab-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 104, 255, 0.25);
+  }
+}
+
+/* ── Banner ── */
+.gas-info-banner {
+  background: linear-gradient(135deg, rgba(0, 104, 255, 0.08) 0%, rgba(10, 79, 214, 0.04) 100%);
+  border: 1px solid rgba(0, 104, 255, 0.2);
+  border-radius: 12px;
+}
+
+.badge-tag-status {
+  background: #e6f0ff;
+  color: #0068ff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+[zaui-theme="dark"] .badge-tag-status,
+[data-theme="dark"] .badge-tag-status {
+  background: #102a54;
+  color: #52a0ff;
+}
+
+.badge-tag-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #e6f9ed;
+  color: #027a48;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+[zaui-theme="dark"] .badge-tag-live,
+[data-theme="dark"] .badge-tag-live {
+  background: #0c331e;
+  color: #34d399;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #12b76a;
+  box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.7);
+  animation: pulse-dot 1.8s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(18, 183, 106, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(18, 183, 106, 0);
+  }
+}
+
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 104, 255, 0.25);
+  background: var(--bg-card);
+  color: #0068ff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #0068ff;
+    color: #fff;
+  }
+
+  &.rotating i,
+  &.rotating svg {
+    animation: spin-refresh 0.8s linear infinite;
+  }
+}
+
+@keyframes spin-refresh {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gas-banner-desc {
+  color: var(--text-muted);
+}
+
+.last-sync-time {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Zone Selector Card ── */
+.zone-selector-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.zone-info-link {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #0068ff;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.zone-btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.zone-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    border-color: #0068ff;
+    background: rgba(0, 104, 255, 0.08);
+    color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.zone-btn-title {
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.zone-btn-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Filter Pills ── */
+.gas-filter-pills {
+  gap: 8px;
+}
+
+.pill-btn {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    background: var(--text-primary);
+    color: var(--bg-card);
+    border-color: var(--text-primary);
+    font-weight: 600;
+  }
+}
+
+/* ── Product Card ── */
+.gas-product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: rgba(0, 104, 255, 0.4);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.product-title {
+  color: var(--text-primary);
+}
+
+.product-desc {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.badge-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 8px;
+
+  &.badge-primary {
+    background: #e6f0ff;
+    color: #0068ff;
+  }
+  &.badge-success {
+    background: #e6f9ed;
+    color: #12b76a;
+  }
+  &.badge-info {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+  &.badge-warning {
+    background: #fef3c7;
+    color: #d97706;
+  }
+  &.badge-default {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+}
+
+[zaui-theme="dark"] .badge-pill,
+[data-theme="dark"] .badge-pill {
+  &.badge-primary { background: #102a54; color: #52a0ff; }
+  &.badge-success { background: #0c331e; color: #34d399; }
+  &.badge-info { background: #0c2d48; color: #38bdf8; }
+  &.badge-warning { background: #3b2606; color: #fbbf24; }
+  &.badge-default { background: #26272b; color: #9ca3af; }
+}
+
+.gas-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #0068ff;
+    border-color: #0068ff;
+  }
+}
+
+.price-row {
+  border-top: 1px dashed var(--border-color);
+}
+
+.price-unit-label {
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.price-value-highlight {
+  color: #e02424;
+  letter-spacing: -0.5px;
+}
+
+[zaui-theme="dark"] .price-value-highlight,
+[data-theme="dark"] .price-value-highlight {
+  color: #ff6b6b;
+}
+
+.diff-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+
+  &.diff-down {
+    background: #e6f9ed;
+    color: #027a48;
+  }
+  &.diff-up {
+    background: #fee4e2;
+    color: #b42318;
+  }
+  &.diff-flat {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+}
+
+[zaui-theme="dark"] .diff-badge,
+[data-theme="dark"] .diff-badge {
+  &.diff-down { background: #0c331e; color: #34d399; }
+  &.diff-up { background: #3d1413; color: #f87171; }
+  &.diff-flat { background: #26272b; color: #9ca3af; }
+}
+
+.diff-label {
+  color: var(--text-muted);
+}
+
+/* ── Calculator ── */
+.calc-mode-switch {
+  display: flex;
+  gap: 6px;
+}
+
+.calc-mode-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 6px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.calc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.calc-sub-desc {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.vehicle-type-switch {
+  gap: 8px;
+}
+
+.v-type-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: rgba(0, 104, 255, 0.08);
+    border-color: #0068ff;
+    color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.level-btn-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.level-btn {
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.calc-result-box {
+  background: var(--bg-page);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.result-money-highlight {
+  color: #0068ff;
+}
+
+.result-liter-highlight {
+  color: #12b76a;
+}
+
+.result-divider {
+  height: 1px;
+  background: var(--border-color);
+  width: 100%;
+}
+
+.result-label {
+  color: var(--text-muted);
+}
+
+.quick-amount-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quick-amt-btn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-page);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    border-color: #0068ff;
+    color: #0068ff;
+  }
+}
+
+.calc-note {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ── History Table ── */
+.history-header-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.history-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.history-item-row {
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.history-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+
+  &.dot-down { background: #12b76a; }
+  &.dot-up { background: #f04438; }
+  &.dot-flat { background: #9ca3af; }
+}
+
+.history-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+
+  &.tag-down { background: #e6f9ed; color: #027a48; }
+  &.tag-up { background: #fee4e2; color: #b42318; }
+  &.tag-flat { background: #f3f4f6; color: #6b7280; }
+}
+
+[zaui-theme="dark"] .history-tag,
+[data-theme="dark"] .history-tag {
+  &.tag-down { background: #0c331e; color: #34d399; }
+  &.tag-up { background: #3d1413; color: #f87171; }
+  &.tag-flat { background: #26272b; color: #9ca3af; }
+}
+
+.history-prices {
+  background: var(--bg-page);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.history-lbl {
+  color: var(--text-muted);
+}
+
+.history-note {
+  color: var(--text-muted);
+}
+
+/* ── Gas Stations ── */
+.station-prov-filter {
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 4px;
+}
+
+.prov-btn {
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.station-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.station-brand-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+
+  &.brand-petrolimex {
+    background: #0056b3;
+    color: #fff;
+  }
+  &.brand-pvoil {
+    background: #e02424;
+    color: #fff;
+  }
+  &.brand-comeco {
+    background: #d9480f;
+    color: #fff;
+  }
+}
+
+.station-addr {
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.station-247-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #e6f9ed;
+  color: #027a48;
+}
+
+[zaui-theme="dark"] .station-247-tag,
+[data-theme="dark"] .station-247-tag {
+  background: #0c331e;
+  color: #34d399;
+}
+
+.fuel-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-page);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.station-footer {
+  border-top: 1px dashed var(--border-color);
+}
+
+.station-services {
+  color: var(--text-muted);
+}
+
+.station-copy-addr {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #0068ff;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ── Zone Sheet ── */
+.zone-prov-tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(0, 104, 255, 0.08);
+  color: #0068ff;
+  border: 1px solid rgba(0, 104, 255, 0.2);
+
+  &.zone2 {
+    background: rgba(224, 122, 0, 0.08);
+    color: #e07a00;
+    border-color: rgba(224, 122, 0, 0.2);
+  }
+}
+
+/* ── Explicit Select Option Styling (Dark Mode User Rule) ── */
+.gas-custom-select option,
+select.form-control option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .gas-custom-select option,
+[data-theme="dark"] select.form-control option,
+body[zaui-theme="dark"] .gas-custom-select option,
+body[zaui-theme="dark"] select.form-control option {
+  background-color: #1c1d22 !important;
+  color: #f4f5f6 !important;
+}
+
+/* ── Gas Stations GPS & Payment Highlights ── */
+.gps-locate-card {
+  background: linear-gradient(135deg, rgba(0, 104, 255, 0.08) 0%, rgba(18, 183, 106, 0.08) 100%);
+  border: 1px dashed rgba(0, 104, 255, 0.3);
+  border-radius: 12px;
+}
+
+.gps-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #0068ff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #0056d6;
+  }
+}
+
+.station-feature-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 4px;
+}
+
+.feat-btn {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: #0068ff;
+    color: #fff;
+    border-color: #0068ff;
+    font-weight: 600;
+  }
+}
+
+.distance-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #e6f0ff;
+  color: #0068ff;
+}
+
+[zaui-theme="dark"] .distance-badge,
+[data-theme="dark"] .distance-badge {
+  background: #102a54;
+  color: #52a0ff;
+}
+
+.payment-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #e6f9ed;
+  color: #027a48;
+}
+
+[zaui-theme="dark"] .payment-badge,
+[data-theme="dark"] .payment-badge {
+  background: #0c331e;
+  color: #34d399;
+}
+
+.maps-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(0, 104, 255, 0.3);
+  background: rgba(0, 104, 255, 0.08);
+  color: #0068ff;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #0068ff;
+    color: #fff;
+  }
+}
+
+/* ── Chế độ Cứu hộ hết xăng (Bán kính 200m, 500m, 1km...) ── */
+.emergency-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e02424;
+  background: #fee4e2;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &.active {
+    background: #e02424;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(224, 36, 36, 0.25);
+  }
+}
+
+[zaui-theme="dark"] .emergency-toggle-btn,
+[data-theme="dark"] .emergency-toggle-btn {
+  background: #381211;
+  color: #f87171;
+  border-color: #f87171;
+
+  &.active {
+    background: #b42318;
+    color: #fff;
+  }
+}
+
+.emergency-alert-card {
+  background: linear-gradient(135deg, rgba(224, 36, 36, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%);
+  border: 1.5px solid rgba(224, 36, 36, 0.35);
+  border-radius: 12px;
+}
+
+.radius-pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &.active {
+    background: #e02424;
+    color: #fff;
+    border-color: #e02424;
+  }
+}
+
+.dist-badge-near {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #e6f9ed;
+  color: #027a48;
+  border: 1px solid rgba(2, 122, 72, 0.3);
+}
+
+.dist-badge-mid {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid rgba(180, 83, 9, 0.3);
+}
+
+.dist-badge-far {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #fee4e2;
+  color: #b42318;
+  border: 1px solid rgba(180, 35, 24, 0.3);
+}
+
+[zaui-theme="dark"] .dist-badge-near,
+[data-theme="dark"] .dist-badge-near {
+  background: #0c331e;
+  color: #34d399;
+}
+
+[zaui-theme="dark"] .dist-badge-mid,
+[data-theme="dark"] .dist-badge-mid {
+  background: #3b280c;
+  color: #fbbf24;
+}
+
+[zaui-theme="dark"] .dist-badge-far,
+[data-theme="dark"] .dist-badge-far {
+  background: #3d1413;
+  color: #f87171;
+}
+
+.preset-loc-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px dashed #0068ff;
+  background: rgba(0, 104, 255, 0.08);
+  color: #0068ff;
+  cursor: pointer;
+  margin-top: 6px;
+
+  &:hover {
+    background: #0068ff;
+    color: #fff;
+  }
+}
+
+.unpriced-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+

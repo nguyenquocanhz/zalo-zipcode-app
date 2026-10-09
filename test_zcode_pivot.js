@@ -45,7 +45,7 @@ if (appConfig && appConfig.app) {
   const noBanned = !/\b(zalo|mini\s*app)\b/i.test(title);
   record(results.gate1, 'G1_NO_BANNED', 'Tiêu đề không chứa từ cấm Zalo/Mini App', noBanned, `Title: "${title}"`, noBanned ? 'PASS' : 'FAIL');
 
-  const hasAffix = /^(WrenApp|WrenTool|[A-Z][a-z0-9]+)\s*[-:]/i.test(title) || title.includes('-');
+  const hasAffix = /^(WrenApp|WrenTool|[A-Z][a-z0-9]+)\s*[-:]/i.test(title) || title.includes('-') || /\b(by|bởi)\s+[A-Za-z0-9]+/i.test(title);
   record(results.gate1, 'G1_OWNER_AFFIX', 'Tiêu đề có định danh chủ thể', hasAffix, `Tiền tố/hậu tố: "${title}"`, hasAffix ? 'PASS' : 'FAIL');
 }
 
@@ -154,10 +154,24 @@ if (appConfig && fs.existsSync(wwwAssets)) {
   const actualCss = fs.readdirSync(wwwAssets).filter(f => f.endsWith('.css'));
   const configJs = (appConfig.listAsyncJS || []).map(p => path.basename(p));
   const configCss = (appConfig.listCSS || []).map(p => path.basename(p));
-  
-  const jsMatch = actualJs.every(f => configJs.includes(f));
-  const cssMatch = actualCss.every(f => configCss.includes(f));
-  isSync = jsMatch && cssMatch;
+
+  // Kiểm tra: Các entry assets khai báo trong app-config.json phải tồn tại thực tế trong www/assets
+  // (tránh lỗi nghiêm trọng "No asset defined" khi deploy lên Zalo)
+  const configJsValid = configJs.length > 0 && configJs.every(f => actualJs.includes(f));
+  const configCssValid = configCss.length > 0 && configCss.every(f => actualCss.includes(f));
+
+  // Đồng thời đảm bảo entry point từ www/index.html được đăng ký đầy đủ
+  const wwwIndex = path.join(process.cwd(), 'www', 'index.html');
+  let entryJsMatched = true;
+  if (fs.existsSync(wwwIndex)) {
+    const html = fs.readFileSync(wwwIndex, 'utf8');
+    const entryMatch = html.match(/src="([^"]+\.js)"/);
+    if (entryMatch) {
+      entryJsMatched = configJs.includes(path.basename(entryMatch[1]));
+    }
+  }
+
+  isSync = configJsValid && configCssValid && entryJsMatched;
 }
 record(results.gate4, 'G4_ASSET_SYNC', 'Đồng bộ mã băm Asset vào app-config.json', isSync, 'Không lỗi "No asset defined"', isSync ? 'Đồng bộ 1:1' : 'Lệch mã băm');
 

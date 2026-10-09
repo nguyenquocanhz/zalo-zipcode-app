@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo, lazy, Suspense } from "react";
 import {
   Page, Box, Text, Input, Button, Select, List, Spinner, Icon, Sheet, useTheme,
 } from "zmp-ui";
@@ -10,6 +10,10 @@ import {
   stripDiacritics,
 } from "../../utils/vn-zipcodes";
 import { COUNTRIES } from "../../utils/countries";
+
+/* Tab Giá xăng không nằm trên màn hình đầu → tách chunk riêng để giảm Load Delay của LCP */
+const loadGasPriceTab = () => import("../gas/GasPriceTab");
+const GasPriceTab = lazy(loadGasPriceTab);
 
 const { Option } = Select;
 
@@ -164,7 +168,7 @@ function VnTab() {
       {/* Converter widget */}
       <Box className="converter-box" mt={4}>
         <Box flex alignItems="center" className="converter-header">
-          <Icon icon="zi-retry" size={16} style={{ color: "#0068ff", marginRight: 6 }} />
+          <Icon icon="zi-retry" size={16} className="text-blue" style={{ marginRight: 6 }} />
           <Text.Title size="small" className="field-label" style={{ margin: 0 }}>
             Quy đổi mã 5 số - 6 số
           </Text.Title>
@@ -195,7 +199,7 @@ function VnTab() {
         )}
         {convertInput && convertResult === null && (
           <Box flex alignItems="center" mt={2}>
-            <Icon icon="zi-warning-circle" size={14} style={{ color: "#e0433f", marginRight: 4 }} />
+            <Icon icon="zi-warning-circle" size={14} className="text-error" style={{ marginRight: 4 }} />
             <Text className="error-text" size="xSmall">Mã không hợp lệ hoặc chưa tra được.</Text>
           </Box>
         )}
@@ -235,7 +239,8 @@ function VnTab() {
                   <Icon
                     icon="zi-location-solid"
                     size={14}
-                    style={{ color: "#0068ff", marginRight: 4, marginTop: 2, flexShrink: 0 }}
+                    className="text-blue"
+                    style={{ marginRight: 4, marginTop: 2, flexShrink: 0 }}
                   />
                   <Text size="xSmall" className="po-text">{selected.centerPostOffice}</Text>
                 </Box>
@@ -332,7 +337,8 @@ function VnTab() {
                                   <Icon
                                     icon="zi-bullet-solid"
                                     size={8}
-                                    style={{ color: "#0068ff", marginRight: 6 }}
+                                    className="text-blue"
+                                    style={{ marginRight: 6 }}
                                   />
                                   <Text size="small">{w.name}</Text>
                                 </Box>
@@ -426,7 +432,7 @@ function IntlTab() {
       {popularZips.length > 0 && (
         <Box mb={3}>
           <Box flex alignItems="center" mb={1}>
-            <Icon icon="zi-search" size={14} style={{ color: "#555", marginRight: 4 }} />
+            <Icon icon="zi-search" size={14} className="text-muted" style={{ marginRight: 4 }} />
             <Text size="xSmall" className="field-label" style={{ margin: 0 }}>Gợi ý tra nhanh:</Text>
           </Box>
           <Box className="chip-row mt2">
@@ -474,7 +480,7 @@ function IntlTab() {
 
       {error && (
         <Box flex alignItems="center" mt={3}>
-          <Icon icon="zi-warning-circle" size={16} style={{ color: "#e0433f", marginRight: 6 }} />
+          <Icon icon="zi-warning-circle" size={16} className="text-error" style={{ marginRight: 6 }} />
           <Text className="error-text">{error}</Text>
         </Box>
       )}
@@ -482,7 +488,7 @@ function IntlTab() {
       {result && (
         <Box mt={4} className="result-card">
           <Box flex alignItems="center" mb={2}>
-            <Icon icon="zi-check-circle-solid" size={18} style={{ color: "#0068ff", marginRight: 6 }} />
+            <Icon icon="zi-check-circle-solid" size={18} className="text-blue" style={{ marginRight: 6 }} />
             <Text.Title size="normal">
               {result["post code"]} — {result["country"]}
             </Text.Title>
@@ -521,6 +527,7 @@ function IntlTab() {
 
 /* ─── Home Page ─── */
 function HomePage() {
+  const [mainModule, setMainModule] = useState("zipcode"); // "zipcode" | "gas"
   const [tab, setTab] = useState("vn");
   const [theme, setTheme] = useTheme();
   const getStoredTheme = () => {
@@ -555,14 +562,24 @@ function HomePage() {
     } catch (e) {}
   }, [currentTheme]);
 
+  /* Tải trước chunk Giá xăng sau khi màn hình đầu đã hiển thị */
+  useEffect(() => {
+    const timer = setTimeout(() => loadGasPriceTab().catch(() => {}), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Page className="zipcode-page">
       <Box className="app-header" p={4}>
         <Box flex alignItems="center" justifyContent="space-between" mb={1}>
           <Box flex alignItems="center">
-            <Icon icon="zi-location-solid" size={24} style={{ color: "#fff", marginRight: 8 }} />
+            <Icon
+              icon={mainModule === "zipcode" ? "zi-location-solid" : "zi-poll"}
+              size={24}
+              className="header-icon"
+            />
             <Text.Title size="large" className="header-title">
-              WrenApp - Tra cứu mã bưu chính
+              {mainModule === "zipcode" ? "Tra cứu mã bưu chính By Wren" : "Tra cứu giá xăng dầu By Wren"}
             </Text.Title>
           </Box>
           <button
@@ -575,33 +592,66 @@ function HomePage() {
             <span>{isDark ? "Sáng" : "Tối"}</span>
           </button>
         </Box>
-        <Text className="header-sub">Việt Nam &amp; hơn 60 quốc gia · Quy đổi mã 5 - 6 số</Text>
+        <Text className="header-sub">
+          {mainModule === "zipcode"
+            ? "Việt Nam & hơn 60 quốc gia · Quy đổi mã 5 - 6 số"
+            : "Bảng giá Vùng 1 & 2 · Máy tính tiền xăng · Cây xăng"}
+        </Text>
       </Box>
 
-      <Box className="tab-switch" px={4}>
-        <Button
-          className={tab === "vn" ? "tab-btn tab-btn-active" : "tab-btn"}
-          onClick={() => setTab("vn")}
-          size="small"
+      {/* ── Main Module Navigation ── */}
+      <Box className="main-module-switch" px={4}>
+        <button
+          type="button"
+          className={`main-nav-btn ${mainModule === "zipcode" ? "active" : ""}`}
+          onClick={() => setMainModule("zipcode")}
         >
-          <Box flex alignItems="center" justifyContent="center">
-            <Icon icon="zi-home" size={15} style={{ marginRight: 6 }} />
-            <span>Việt Nam</span>
-          </Box>
-        </Button>
-        <Button
-          className={tab === "intl" ? "tab-btn tab-btn-active" : "tab-btn"}
-          onClick={() => setTab("intl")}
-          size="small"
+          <Icon icon="zi-location-solid" size={16} style={{ marginRight: 6 }} />
+          <span>Mã Bưu Chính</span>
+        </button>
+        <button
+          type="button"
+          className={`main-nav-btn ${mainModule === "gas" ? "active" : ""}`}
+          onClick={() => setMainModule("gas")}
         >
-          <Box flex alignItems="center" justifyContent="center">
-            <Icon icon="zi-share-external-1" size={15} style={{ marginRight: 6 }} />
-            <span>Quốc tế</span>
-          </Box>
-        </Button>
+          <Icon icon="zi-poll" size={16} style={{ marginRight: 6 }} />
+          <span>Giá Xăng Dầu</span>
+        </button>
       </Box>
 
-      {tab === "vn" ? <VnTab /> : <IntlTab />}
+      {/* ── Content Area ── */}
+      {mainModule === "zipcode" ? (
+        <>
+          <Box className="tab-switch" px={4}>
+            <Button
+              className={tab === "vn" ? "tab-btn tab-btn-active" : "tab-btn"}
+              onClick={() => setTab("vn")}
+              size="small"
+            >
+              <Box flex alignItems="center" justifyContent="center">
+                <Icon icon="zi-home" size={15} style={{ marginRight: 6 }} />
+                <span>Việt Nam</span>
+              </Box>
+            </Button>
+            <Button
+              className={tab === "intl" ? "tab-btn tab-btn-active" : "tab-btn"}
+              onClick={() => setTab("intl")}
+              size="small"
+            >
+              <Box flex alignItems="center" justifyContent="center">
+                <Icon icon="zi-share-external-1" size={15} style={{ marginRight: 6 }} />
+                <span>Quốc tế</span>
+              </Box>
+            </Button>
+          </Box>
+
+          {tab === "vn" ? <VnTab /> : <IntlTab />}
+        </>
+      ) : (
+        <Suspense fallback={<Box p={4} flex justifyContent="center"><Spinner visible /></Box>}>
+          <GasPriceTab />
+        </Suspense>
+      )}
     </Page>
   );
 }

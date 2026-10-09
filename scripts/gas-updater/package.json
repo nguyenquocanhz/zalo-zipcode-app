@@ -1,0 +1,19 @@
+{
+  "name": "wrenapp-gas-updater",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tự động cập nhật giá xăng dầu từ thông cáo báo chí Petrolimex cho WrenApp",
+  "main": "update.js",
+  "scripts": {
+    "update": "node update.js",
+    "dry": "node update.js --dry-run",
+    "test": "node test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "tesseract.js": "^5.1.1"
+  }
+}

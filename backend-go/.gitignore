@@ -1,0 +1,10 @@
+# Binaries
+/server
+/server.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Data persistent cache on host (optional to ignore or track)
+/data/gas_prices.json

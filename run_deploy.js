@@ -44,23 +44,9 @@ async function main() {
 
     // 3. Đồng bộ danh sách tài nguyên thực tế từ www/assets vào app-config.json
     console.log('[2/3] Đồng bộ danh sách tài nguyên vào app-config.json...');
-    const wwwConfigPath = path.join(cwd, 'www', 'app-config.json');
-    const rootConfigPath = path.join(cwd, 'app-config.json');
-    const rootAppJsonPath = path.join(cwd, 'app.json');
-
-    const assets = fs.existsSync(wwwAssetsPath) ? fs.readdirSync(wwwAssetsPath) : [];
-    const cssFiles = assets.filter(f => f.endsWith('.css')).map(f => `assets/${f}`);
-    const jsFiles = assets.filter(f => f.endsWith('.js')).map(f => `assets/${f}`);
-
-    const rootConfig = JSON.parse(fs.readFileSync(rootConfigPath, 'utf8'));
-    rootConfig.listCSS = cssFiles;
-    rootConfig.listAsyncJS = jsFiles;
-    rootConfig.listSyncJS = [];
-
-    fs.writeFileSync(rootConfigPath, JSON.stringify(rootConfig, null, 2), 'utf8');
-    fs.writeFileSync(rootAppJsonPath, JSON.stringify(rootConfig, null, 2), 'utf8');
-    fs.writeFileSync(wwwConfigPath, JSON.stringify(rootConfig, null, 2), 'utf8');
-    console.log(`✓ Đã cập nhật assets: CSS (${cssFiles.join(', ')}), JS (${jsFiles.join(', ')})!\n`);
+    const { activeCss, activeJs } = require('./sync_assets').syncAssets();
+    console.log(`✓ Đã cập nhật assets: CSS (${activeCss.join(', ')}), JS (${activeJs.join(', ')})!
+`);
 
     // 4. Deploy
     console.log('[3/3] Đang tải lên Zalo Mini App Cloud (Phiên bản Testing)...');

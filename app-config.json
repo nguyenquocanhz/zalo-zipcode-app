@@ -1,7 +1,7 @@
 {
   "app": {
     "appId": "2522725584854781271",
-    "title": "WrenApp - Tra cứu mã bưu chính",
+    "title": "Tra cứu bưu chính và giá xăng By Wren",
     "headerColor": "#0068FF",
     "statusBarColor": "#0068FF",
     "textColor": "white"
@@ -16,10 +16,10 @@
   "listSyncableEvent": [],
   "permission": {},
   "listCSS": [
-    "assets/index-cd1df347.css"
+    "assets/style-b9f96d01.css"
   ],
   "listSyncJS": [],
   "listAsyncJS": [
-    "assets/index-42afe0bb.js"
+    "assets/index.2b57a538.module.js"
   ]
 }
