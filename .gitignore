@@ -44,3 +44,4 @@ Thumbs.db
 
 # Cấu hình Worker có domain thật
 wrangler.local.toml
+.dev.vars

@@ -7,7 +7,7 @@
  *
  *   GET  /api/gas/prices    giá hiện hành (cùng định dạng backend Go)
  *   GET  /api/gas/history   lịch sử các kỳ điều hành
- *   POST /api/gas/refresh   bỏ cache, tải lại feed ngay (GitHub Action gọi sau khi cập nhật)
+ *   POST /api/gas/refresh   bỏ cache, tải lại feed ngay; cần header Authorization: Bearer <REFRESH_SECRET>
  *   GET  /health
  */
 import bundledFeed from "../../gas-price-latest.json";
@@ -82,6 +82,21 @@ async function getFeed(request, env, ctx, { refresh = false } = {}) {
   return { feed: bundledFeed, origin: "bundled", fetchedAt: null, cache: "FALLBACK" };
 }
 
+/** So chuỗi không lộ thời gian, để không dò được khoá từng ký tự */
+function safeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+/** Chỉ nhận refresh kèm khoá REFRESH_SECRET (Worker secret); chưa đặt khoá thì từ chối hết */
+function isAuthorizedRefresh(request, env) {
+  if (!env.REFRESH_SECRET) return false;
+  const given = (request.headers.get("Authorization") || "").replace(/^Bearer /i, "");
+  return safeEqual(given, env.REFRESH_SECRET);
+}
+
 function withServerInfo(feed, meta, request) {
   return {
     ...feed,
@@ -118,7 +133,8 @@ export default {
       return json({ total: history.length, history });
     }
 
-    if (pathname === "/api/gas/refresh" && (request.method === "POST" || request.method === "GET")) {
+    if (pathname === "/api/gas/refresh" && request.method === "POST") {
+      if (!isAuthorizedRefresh(request, env)) return json({ error: "Unauthorized" }, 401, { "Cache-Control": "no-store" });
       const meta = await getFeed(request, env, ctx, { refresh: true });
       return json(
         {

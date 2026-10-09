@@ -88,4 +88,6 @@ jobs:
 
       - name: Báo backend đồng bộ ngay
         if: steps.update.outputs.changed == 'true' && vars.BACKEND_REFRESH_URL != ''
-        run: curl -fsS -m 20 -X POST "${{ vars.BACKEND_REFRESH_URL }}" || echo "Backend không phản hồi, nó sẽ tự đồng bộ theo lịch."
+        env:
+          REFRESH_SECRET: ${{ secrets.BACKEND_REFRESH_SECRET }}
+        run: curl -fsS -m 20 -X POST -H "Authorization: Bearer $REFRESH_SECRET" "${{ vars.BACKEND_REFRESH_URL }}" || echo "Backend không phản hồi, nó sẽ tự đồng bộ theo lịch."
