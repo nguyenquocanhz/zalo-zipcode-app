@@ -42,6 +42,25 @@ test("chuẩn hoá tên mặt hàng OCR", () => {
   assert.equal(normalizeLabel("Dâu hỏa 2- K"), "DAU HOA 2- K");
 });
 
+test("nhận mặt hàng khi OCR đọc chữ S thành số 5", () => {
+  // Dòng OCR thật của kỳ 08/10/2026
+  const rows = [
+    { label: "Xăng E10 RON 95 Mức 5", z1: 29050, z2: 29630 },
+    { label: "Xăng E10 RON 95 Mức 3", z1: 28250, z2: 28810 },
+    { label: "Xăng E5 RON 92 Mức 2", z1: 27700, z2: 28250 },
+    { label: "Điêzen 0,001S Mức 5", z1: 30520, z2: 31130 },
+    { label: "Điêzen 0,055 Mức 2", z1: 29120, z2: 29700 },
+    { label: "Dâu hỏa 2- K", z1: 30630, z2: 31240 },
+    { label: "Dầu Mazut 3,5S", z1: 21090, z2: 21510 },
+    { label: "Dầu Mazut 180 0,5S", z1: 27490, z2: 28030 },
+  ];
+  const { prices, errors } = mapAndValidate(rows);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(prices.diesel_2, { z1: 29120, z2: 29700 });
+  assert.deepEqual(prices.diesel_5, { z1: 30520, z2: 31130 });
+  assert.deepEqual(prices.mazut, { z1: 21090, z2: 21510 });
+});
+
 test("quy tắc Vùng 2 = Vùng 1 × 1,02 làm tròn xuống 10đ", () => {
   assert.equal(expectedZone2(28180), 28740);
   assert.equal(expectedZone2(29770), 30360);

@@ -4,15 +4,15 @@
  */
 
 // Tên trong bảng Petrolimex đổi theo từng kỳ ("E10 RON 95-V" ↔ "E10 RON 95 Mức 5"), nên nhận theo từ khoá.
-// OCR hay đọc "III" thành "lll" / "lIl", nên chuẩn hoá trước khi so.
+// OCR hay đọc "III" thành "lll" / "lIl", nên chuẩn hoá trước khi so; chữ "S" cuối hay bị đọc thành "5" ("0,05S" → "0,055").
 const MATCHERS = [
   { id: "ron95_5", test: (s) => /RON ?95/.test(s) && (/95 ?- ?V\b/.test(s) || /MUC ?5/.test(s)) },
   { id: "ron95_3", test: (s) => /RON ?95/.test(s) && (/95 ?- ?III/.test(s) || /MUC ?3/.test(s)) },
   { id: "e5_ron92", test: (s) => /E5/.test(s) && /92/.test(s) },
   { id: "diesel_5", test: (s) => /0[,.]001/.test(s) },
-  { id: "diesel_2", test: (s) => /0[,.]05 ?S/.test(s) },
+  { id: "diesel_2", test: (s) => /0[,.]05 ?[S5]/.test(s) },
   { id: "kerosene", test: (s) => /DAU HOA/.test(s) },
-  { id: "mazut", test: (s) => /MAZUT/.test(s) && /(2B|3[,.]5 ?S)/.test(s) && !/180/.test(s) },
+  { id: "mazut", test: (s) => /MAZUT/.test(s) && /(2B|3[,.]5 ?[S5])/.test(s) && !/180/.test(s) },
 ];
 
 const REQUIRED_IDS = MATCHERS.map((m) => m.id);
