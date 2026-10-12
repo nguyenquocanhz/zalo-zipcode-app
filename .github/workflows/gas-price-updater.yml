@@ -90,4 +90,5 @@ jobs:
         if: steps.update.outputs.changed == 'true' && vars.BACKEND_REFRESH_URL != ''
         env:
           REFRESH_SECRET: ${{ secrets.BACKEND_REFRESH_SECRET }}
-        run: curl -fsS -m 20 -X POST -H "Authorization: Bearer $REFRESH_SECRET" "${{ vars.BACKEND_REFRESH_URL }}" || echo "Backend không phản hồi, nó sẽ tự đồng bộ theo lịch."
+        run: |
+          curl -fsS -m 20 -X POST -H "Authorization: Bearer $REFRESH_SECRET" "${{ vars.BACKEND_REFRESH_URL }}" || echo "Backend không phản hồi, nó sẽ tự đồng bộ theo lịch."
